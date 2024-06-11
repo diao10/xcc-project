@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Member">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="mem_Id" jdbcType="VARCHAR" property="memId" />
+    <result column="referrer_Id" jdbcType="VARCHAR" property="referrerId" />
+    <result column="mem_Name" jdbcType="VARCHAR" property="memName" />
+    <result column="mem_pwd" jdbcType="VARCHAR" property="memPwd" />
+    <result column="mem_gender" jdbcType="VARCHAR" property="memGender" />
+    <result column="mem_email" jdbcType="VARCHAR" property="memEmail" />
+    <result column="mem_tel" jdbcType="VARCHAR" property="memTel" />
+    <result column="mem_birth" jdbcType="DATE" property="memBirth" />
+    <result column="mem_address" jdbcType="VARCHAR" property="memAddress" />
+    <result column="last_Login_Time" jdbcType="DATE" property="lastLoginTime" />
+    <result column="the_Login_Time" jdbcType="DATE" property="theLoginTime" />
+    <result column="mem_integral" jdbcType="INTEGER" property="memIntegral" />
+    <result column="mem_class" jdbcType="INTEGER" property="memClass" />
+    <result column="mem_class_name" jdbcType="VARCHAR" property="memClassName" />
+    <result column="mem_point" jdbcType="INTEGER" property="memPoint" />
+    <result column="mem_level" jdbcType="INTEGER" property="memLevel" />
+    <result column="mem_level_name" jdbcType="VARCHAR" property="memLevelName" />
+    <result column="sign_count" jdbcType="INTEGER" property="signCount" />
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+    <result column="filed1" jdbcType="VARCHAR" property="filed1" />
+    <result column="filed2" jdbcType="VARCHAR" property="filed2" />
+    <result column="filed3" jdbcType="VARCHAR" property="filed3" />
+    <result column="create_Date" jdbcType="TIMESTAMP" property="createDate" />
+    <collection property="MemClassList" ofType="com.tyyy.bean.MemClass">
+  		 <id column="id" jdbcType="INTEGER" property="id" />
+   		 <result column="class_max" jdbcType="INTEGER" property="classMax" />
+   		 <result column="class_min" jdbcType="INTEGER" property="classMin" />
+    	 <result column="class_name" jdbcType="VARCHAR" property="className" />
+         <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+  	</collection>  
+  	<collection property="LevelList" ofType="com.tyyy.bean.MemLevel">
+  		 <id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="level_min" jdbcType="INTEGER" property="levelMin" />
+	    <result column="level_max" jdbcType="INTEGER" property="levelMax" />
+	    <result column="level_name" jdbcType="VARCHAR" property="levelName" />
+	    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+	    <result column="delete_date" jdbcType="DATE" property="deleteDate" />
+  	</collection> 
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, mem_Id, referrer_Id, mem_Name, mem_pwd, mem_gender, mem_email, mem_tel, mem_birth, 
+    mem_address, last_Login_Time, the_Login_Time, mem_integral, mem_class, mem_class_name, 
+    mem_point, mem_level, mem_level_name, sign_count, delete_flag, filed1, filed2, filed3, 
+    create_Date
+  </sql>
+  <sql id="login_Column_list">
+    id, mem_Id, referrer_Id, mem_Name, mem_pwd, mem_gender, mem_email, mem_tel, mem_birth, 
+    mem_address, last_Login_Time, the_Login_Time, mem_integral, mem_class, mem_class_name, 
+    mem_point, mem_level, mem_level_name, sign_count, delete_flag, filed1, filed2, filed3, 
+    create_Date
+  </sql>
+  <select id="loginMemId" parameterType="com.tyyy.bean.Member" resultMap="BaseResultMap">
+    select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where mem_Id = #{memId,jdbcType=VARCHAR} and mem_pwd = #{memPwd,jdbcType=VARCHAR} and delete_flag = 0
+  </select>
+  <select id="loginEmail" parameterType="com.tyyy.bean.Member" resultMap="BaseResultMap">
+    select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where mem_email = #{memEmail,jdbcType=VARCHAR} and mem_pwd = #{memPwd,jdbcType=VARCHAR} and delete_flag = 0
+  </select>
+  	<!-- 查询下线 -->
+  <select id="selMemberJunior" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where referrer_Id = #{referrerId,jdbcType=VARCHAR} and delete_flag = 0
+  </select>
+  <select id="sellMemberAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where delete_flag = 0 
+    	<if test="referrerId != null">and referrer_Id = #{referrerId,jdbcType=VARCHAR}</if>
+    	<if test="memName!=null">and mem_Name like '%${memName}%'</if>
+    	<if test="memLevelName!=null">and mem_Level_Name like '%${memLevelName}%'</if>
+    order by mem_Name
+ 		<if test="desc_Type==2">desc</if>
+ 	,create_Date
+ 		<if test="date_desc==4">desc</if>
+  </select>
+  <select id="selMem" resultMap="BaseResultMap">
+  	select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where delete_flag = 0 
+    <if test="memName!=null">and mem_Name like '%${memName}%'</if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selEmail" parameterType="java.lang.String" resultType="int">
+      select count(*) from TY_MEMBER where mem_email = #{email}
+  </select>
+  <select id="selMemBerIdByMail" parameterType="java.lang.String" resultType="long">
+      select id from TY_MEMBER where mem_email = #{email}
+  </select>
+  <select id="selMemBerByMail" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select * from TY_MEMBER where mem_email = #{email}
+  </select>
+  <!-- 查询上线主键 -->
+  <!-- <select id="selUp" parameterType="java.lang.String" resultType="long">
+      select id from TY_MEMBER where MEM_ID = #{referrerId,jdbcType=VARCHAR}
+  </select> -->
+  <select id="selReferrer" parameterType="java.lang.String" resultType="int">
+      select count(*) from TY_MEMBER where MEM_ID = #{referrerId,jdbcType=VARCHAR}
+  </select>
+   <select id="selMemberByR" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where  mem_Id=#{referrerId,jdbcType=VARCHAR}
+  </select>
+   <select id="selMemberByM" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where delete_flag = 0 and referrer_Id=#{memId,jdbcType=VARCHAR}
+  </select>
+  <select id="selMemberByX" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="login_Column_list" />
+    from ty_member
+    where delete_flag = 0 and referrer_id=#{referrerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update ty_member set delete_flag=1
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tyyy.bean.Member">
+    insert into ty_member ( mem_Id, referrer_Id, 
+      mem_Name, mem_pwd, mem_gender, 
+      mem_email, mem_tel, mem_Birth,
+      mem_address, 
+      filed1,filed2
+      )
+    values ( #{memId,jdbcType=VARCHAR}, #{referrerId,jdbcType=VARCHAR}, 
+      #{memName,jdbcType=VARCHAR}, #{memPwd,jdbcType=VARCHAR}, #{memGender,jdbcType=VARCHAR}, 
+      #{memEmail,jdbcType=VARCHAR}, #{memTel,jdbcType=VARCHAR},#{memBirth,jdbcType=VARCHAR},
+      #{memAddress,jdbcType=VARCHAR},
+       #{filed1,jdbcType=VARCHAR}, #{filed2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.Member">
+    insert into ty_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memId != null">
+        mem_Id,
+      </if>
+      <if test="referrerId != null">
+        referrer_Id,
+      </if>
+      <if test="memName != null">
+        mem_Name,
+      </if>
+      <if test="memPwd != null">
+        mem_pwd,
+      </if>
+      <if test="memGender != null">
+        mem_gender,
+      </if>
+      <if test="memEmail != null">
+        mem_email,
+      </if>
+      <if test="memTel != null">
+        mem_tel,
+      </if>
+      <if test="memBirth != null">
+        mem_birth,
+      </if>
+      <if test="memAddress != null">
+        mem_address,
+      </if>
+      <if test="lastLoginTime != null">
+        last_Login_Time,
+      </if>
+      <if test="theLoginTime != null">
+        the_Login_Time,
+      </if>
+      <if test="memIntegral != null">
+        mem_integral,
+      </if>
+      <if test="memClass != null">
+        mem_class,
+      </if>
+      <if test="memClassName != null">
+        mem_class_name,
+      </if>
+      <if test="memPoint != null">
+        mem_point,
+      </if>
+      <if test="memLevel != null">
+        mem_level,
+      </if>
+      <if test="memLevelName != null">
+        mem_level_name,
+      </if>
+      <if test="signCount != null">
+        sign_count,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="filed1 != null">
+        filed1,
+      </if>
+      <if test="filed2 != null">
+        filed2,
+      </if>
+      <if test="filed3 != null">
+        filed3,
+      </if>
+      <if test="createDate != null">
+        create_Date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memId != null">
+        #{memId,jdbcType=VARCHAR},
+      </if>
+      <if test="referrerId != null">
+        #{referrerId,jdbcType=VARCHAR},
+      </if>
+      <if test="memName != null">
+        #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="memPwd != null">
+        #{memPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="memGender != null">
+        #{memGender,jdbcType=VARCHAR},
+      </if>
+      <if test="memEmail != null">
+        #{memEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="memTel != null">
+        #{memTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memBirth != null">
+        #{memBirth,jdbcType=DATE},
+      </if>
+      <if test="memAddress != null">
+        #{memAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=DATE},
+      </if>
+      <if test="theLoginTime != null">
+        #{theLoginTime,jdbcType=DATE},
+      </if>
+      <if test="memIntegral != null">
+        #{memIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="memClass != null">
+        #{memClass,jdbcType=INTEGER},
+      </if>
+      <if test="memClassName != null">
+        #{memClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="memPoint != null">
+        #{memPoint,jdbcType=INTEGER},
+      </if>
+      <if test="memLevel != null">
+        #{memLevel,jdbcType=INTEGER},
+      </if>
+      <if test="memLevelName != null">
+        #{memLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="signCount != null">
+        #{signCount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="filed1 != null">
+        #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        #{filed3,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.Member">
+    update ty_member
+    <set>
+      <if test="memId != null">
+        mem_Id = #{memId,jdbcType=VARCHAR},
+      </if>
+      <if test="referrerId != null">
+        referrer_Id = #{referrerId,jdbcType=VARCHAR},
+      </if>
+      <if test="memName != null">
+        mem_Name = #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="memPwd != null">
+        mem_pwd = #{memPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="memGender != null">
+        mem_gender = #{memGender,jdbcType=VARCHAR},
+      </if>
+      <if test="memEmail != null">
+        mem_email = #{memEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="memTel != null">
+        mem_tel = #{memTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memBirth != null">
+        mem_birth = #{memBirth,jdbcType=DATE},
+      </if>
+      <if test="memAddress != null">
+        mem_address = #{memAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_Login_Time = #{lastLoginTime,jdbcType=DATE},
+      </if>
+      <if test="theLoginTime != null">
+        the_Login_Time = #{theLoginTime,jdbcType=DATE},
+      </if>
+      <if test="memIntegral != null">
+        mem_integral = #{memIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="memClass != null">
+        mem_class = #{memClass,jdbcType=INTEGER},
+      </if>
+      <if test="memClassName != null">
+        mem_class_name = #{memClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="memPoint != null">
+        mem_point = #{memPoint,jdbcType=INTEGER},
+      </if>
+      <if test="memLevel != null">
+        mem_level = #{memLevel,jdbcType=INTEGER},
+      </if>
+      <if test="memLevelName != null">
+        mem_level_name = #{memLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="signCount != null">
+        sign_count = #{signCount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="filed1 != null">
+        filed1 = #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        filed2 = #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        filed3 = #{filed3,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.Member">
+    update ty_member
+    set
+      mem_Name = #{memName,jdbcType=VARCHAR},
+      mem_pwd = #{memPwd,jdbcType=VARCHAR},
+      referrer_Id = #{referrerId,jdbcType=VARCHAR},
+      mem_gender =#{memGender,jdbcType=VARCHAR},
+      mem_email = #{memEmail,jdbcType=VARCHAR},
+      mem_tel = #{memTel,jdbcType=VARCHAR},
+      mem_birth = #{memBirth,jdbcType=DATE},
+      mem_address = #{memAddress,jdbcType=VARCHAR},
+      mem_integral = #{memIntegral,jdbcType=INTEGER},
+      mem_point = #{memPoint,jdbcType=INTEGER},
+      mem_class = #{memClass,jdbcType=INTEGER},
+      filed1 = #{filed1,jdbcType=VARCHAR},
+      filed2 = #{filed2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   <update id="updateMemTime" parameterType="com.tyyy.bean.Member">
+    update ty_member
+    set
+        last_Login_Time = #{theLoginTime,jdbcType=DATE},
+        the_Login_Time = sysdate(),
+        mem_point = #{memPoint,jdbcType=INTEGER},
+        sign_count = #{signCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   <update id="updateMemIntegral" parameterType="com.tyyy.bean.Member">
+    update ty_member
+    set
+      mem_Integral = #{memIntegral,jdbcType=INTEGER},
+      mem_point = #{memPoint,jdbcType=INTEGER}
+    where delete_flag = 0 and  id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateClass" parameterType="com.tyyy.bean.Member">
+    update ty_member
+    set
+   	  <if test="memClass != null">
+        mem_class = #{memClass,jdbcType=INTEGER},
+      </if>
+      <if test="memClassName != null">
+        mem_class_name = #{memClassName,jdbcType=VARCHAR},
+      </if>
+     mem_level = #{memLevel,jdbcType=INTEGER},
+     mem_level_name = #{memLevelName,jdbcType=VARCHAR}
+      where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selCn"   resultMap="BaseResultMap">
+    select 
+    t2.*
+    from ty_member t1,ty_mem_class t2
+    where t1.mem_Integral between t2.class_min and t2.class_max and t1.id=#{id,jdbcType=BIGINT}
+  </select>
+  <select id="selCnByClass"   resultMap="BaseResultMap">
+    select 
+    t2.*
+    from ty_member t1,ty_mem_class t2
+    where t1.mem_class = t2.id and t1.id=#{id,jdbcType=BIGINT}
+  </select>
+  <select id="selLl" resultMap="BaseResultMap">
+	  select 
+	  	t2.* 
+	  from 
+	  	ty_member t1,ty_mem_level t2 
+	  where 
+	  	t1.mem_point 
+	  between 
+	  	t2.level_min 
+	  and 
+	  	t2.level_max 
+	  and 
+	  	t1.id=#{id,jdbcType=BIGINT}
+  </select> 
+
+  <update id="clearMemberIntergral">
+  	update ty_member set mem_Integral = 0 where delete_flag = 0
+  </update>
+</mapper>

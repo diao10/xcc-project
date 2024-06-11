@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../dist/css/fullcalendar.css' rel='stylesheet' />
+<link href='../dist/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='../dist/js/moment.min.js'></script>
+<script src='../dist/js/jquery.min.js'></script>
+<script src='../dist/js/fullcalendar.min.js'></script>
+<script src='../dist/js/zh-cn.js'></script>
+<script>
+
+	$(document).ready(function() {
+
+		 $('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month',
+								/* 月，周，日，日程表 */
+			},
+			defaultDate: '2017-1-12',
+			navLinks: true, // can click day/week names to navigate views
+			businessHours: true, // display business hours
+			editable: true, 
+			
+			events: [
+				{
+					title: '已签到',
+					start: '2016-12-13',
+					constraint: 'availableForMeeting', // defined below
+					color: '#ee0000',
+				},
+				{
+					start: '2016-12-06',
+					end: '2016-12-08',
+					overlap: false,
+					rendering: 'background',//背景颜色
+					color: '#ee0000'
+				}
+			] 
+		 }); 
+		
+	});
+	$(document).ready(function(){
+		 $('#calendar').fullCalendar({
+			 event:[
+			        {
+			        	title:'签到',
+			        	start:'2017-1-5',
+			        	color:'#ee0000'
+			        }]
+		 })
+		
+	})
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: 微软雅黑;/* 设置字体 */
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+<body>
+	<div id='calendar'></div>
+</body>
+</html>

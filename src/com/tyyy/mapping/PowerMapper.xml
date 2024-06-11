@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.PowerMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Power">
+    <id column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="power_Name" jdbcType="VARCHAR" property="powerName" />
+    <result column="power_Type" jdbcType="INTEGER" property="powerType" />
+    <result column="super_Id" jdbcType="BIGINT" property="superId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, power_Name, power_Type, super_Id, url
+  </sql>
+  <select id="selPowerAll" resultMap="BaseResultMap">
+ 	select* from ty_power
+  </select>
+  <!-- 查询上级模块 -->
+  <!-- <select id="selSuper" resultMap="BaseResultMap">
+    select power_Name,pid,super_Id,power_Type,url from ty_power where super_Id = 0 
+  </select> -->
+  <!-- 查询下级权限 -->
+  <select id="selSonPower" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select pid from ty_power where super_Id = #{pid,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_power
+    where pid = #{pid,jdbcType=BIGINT}
+  </select>
+  <!-- 通过角色ID查询具备的权限 -->
+  <select id="selPowerByCharId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select p.pid,p.power_name,p.super_Id from ty_power p
+		where pid in (select pid from ty_char_to_power where cid = #{cid,jdbcType=BIGINT})
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ty_power
+    where pid = #{pid,jdbcType=BIGINT}
+  </delete>
+  <!--  删除下级权限 -->
+  <delete id="delSonPower" parameterType="java.lang.Long">
+  	delete from ty_power
+  	where super_Id = #{pid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tyyy.bean.Power">
+    insert into ty_power (pid, power_Name, power_Type, 
+      super_Id, url)
+    values (#{pid,jdbcType=BIGINT}, #{powerName,jdbcType=VARCHAR}, #{powerType,jdbcType=INTEGER}, 
+      #{superId,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.Power">
+    insert into ty_power
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="powerName != null">
+        power_Name,
+      </if>
+      <if test="powerType != null">
+        power_Type,
+      </if>
+      <if test="superId != null">
+        super_Id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="powerName != null">
+        #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerType != null">
+        #{powerType,jdbcType=INTEGER},
+      </if>
+      <if test="superId != null">
+        #{superId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updatePower" parameterType="com.tyyy.bean.Power">
+    update ty_power
+    <set>
+      <if test="powerName != null">
+        power_Name = #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerType != null">
+        power_Type = #{powerType,jdbcType=INTEGER},
+      </if>
+      <if test="superId != null">
+        super_Id = #{superId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

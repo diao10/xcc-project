@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+    <!-- 扫描controller -->
+    <context:component-scan base-package="com.tyyy.controller" />
+    <!-- 默认加载两个mvc类 -->
+    <mvc:annotation-driven />
+    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->  
+    <bean id="mappingJackson2HttpMessageConverter"  
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+        <property name="supportedMediaTypes">  
+            <list>  
+                <value>text/html;charset=UTF-8</value>  
+                <value>text/json;charset=UTF-8</value>  
+                <value>application/json;charset=UTF-8</value>  
+            </list>  
+        </property>  
+    </bean> 
+    <!-- 文件上传支持 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>
+    <!-- 视图渲染 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--  设置视图页面的前缀及后缀名 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    
+    
+    <mvc:interceptors>
+	  <mvc:interceptor>
+	   <!--  默认所有的请求都进行拦截 -->
+	   <mvc:mapping path="/*/*.do*"/>
+	   <mvc:mapping path="/*/mem*"/>
+	   <!-- 需排除拦截的地址 -->
+	   <mvc:exclude-mapping path="/dist/**"/>  
+	   <mvc:exclude-mapping path="/tydist/**"/>  
+	   <mvc:exclude-mapping path="/Login/**"/>
+	   <mvc:exclude-mapping path="/Tis/selTisAll.do"/>
+	   <mvc:exclude-mapping path="/Tis/selTis.do"/>
+	   <mvc:exclude-mapping path="/Tis/selTisById.do"/>
+	   <mvc:exclude-mapping path="/Member/saveTemp.do"/>
+	   <mvc:exclude-mapping path="/Member/emailValidate.do"/>
+	   <mvc:exclude-mapping path="/Member/referrerValidate.do"/>
+	   <mvc:exclude-mapping path="/Member/activateMail.do"/>
+	   <mvc:exclude-mapping path="/Member/forgetMail.do"/>
+	   <mvc:exclude-mapping path="/Member/activateForget.do"/>
+	   <mvc:exclude-mapping path="/Member/updatePwdByForget.do"/>
+	   <mvc:exclude-mapping path="/doctor/selDoctorForIndex.do"/>
+	   <mvc:exclude-mapping path="/view/*Login.html"/>
+	   <mvc:exclude-mapping path="/view/memIndex.html"/>
+	   <mvc:exclude-mapping path="/favicon.ico"/>
+	   <bean class="com.tyyy.interceptor.MemPowerInterceptor"></bean>
+	  </mvc:interceptor>
+	  <mvc:interceptor>
+	   <!--  默认所有的请求都进行拦截 -->
+	   <mvc:mapping path="/*/*.emp*"/>
+	   <mvc:mapping path="/*/emp*"/>
+	   <!-- 需排除拦截的地址 -->
+	   <mvc:exclude-mapping path="/dist/**"/>  
+	   <mvc:exclude-mapping path="/tydist/**"/>  
+	   <mvc:exclude-mapping path="/Login/**"/>
+	   <mvc:exclude-mapping path="/view/*Login.html"/>
+	   <mvc:exclude-mapping path="/favicon.ico"/>
+	   <bean class="com.tyyy.interceptor.EmpPowerInterceptor"></bean>
+	  </mvc:interceptor>
+	</mvc:interceptors> 
+    
+    <!-- 静态资源 -->
+    <mvc:resources location="/mobile/" mapping="/mobile/**" />
+ 	<mvc:resources location="/dist/" mapping="/dist/**" />
+  	<mvc:resources location="/tydist/" mapping="/tydist/**" />
+  	<mvc:resources location="/ueditor/" mapping="/ueditor/**" />
+  	
+</beans>

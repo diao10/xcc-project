@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：阳虚质</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+
+   
+  </head>
+  <body>
+   <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src="">
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>阳虚质</h1>
+           <h3 id="other">
+             <br/>
+            </h3>
+             <script type="text/javascript">
+             function getPar(par){
+                 //获取当前URL
+                 var local_url = document.location.href; 
+                 //获取要取得的get参数位置
+                 var get = local_url.indexOf(par +"=");
+                 if(get == -1){
+                     return false;   
+                 }   
+                 //截取字符串
+                 var get_par = local_url.slice(par.length + get + 1);    
+                 //判断截取后的字符串是否还有其他get参数
+                 var nextPar = get_par.indexOf("&");
+                 if(nextPar != -1){
+                     get_par = get_par.slice(0, nextPar);
+                 }
+                 return get_par;
+             }
+           
+		     var bodyA2=getPar("bodyA2");
+		     bodyA2= decodeURI(bodyA2);
+             //   if(bodyA2!="倾向"){
+                  document.getElementById("other").innerText=bodyA2;
+            //  }
+             
+            </script>
+            
+          </div>
+          <p class="typeinfo-desc">
+         根据您的体质辨识结果，建议你从阳虚质开始调理，阳虚是一种身体阳气不足，失于温煦，以形寒肢冷等虚汗表现为主要特征的体质。随着年龄的增长会变成阳虚兼血瘀、阳虚兼痰湿体质。  
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm3/5.jpg" />
+                          <img src="rm3/1.jpg" />
+                          <img src="rm3/2.jpg" />
+                          <img src="rm3/3.jpg" />
+                          <img src="rm3/4.jpg" />                         
+                          <img src="rm3/6.jpg" />
+                          <img src="rm3/7.jpg" />
+                          <img src="rm3/8.jpg" />
+                          <img src="rm3/9.jpg" />
+                    </div>
+      </div>
+      <div class="row gallry">
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+        <div class="item active">
+            <h3>什么是阳虚？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>火力不够，阳气不足。</li>
+                <li>平时怕冷，手脚不暖和。</li>
+                <li>喜欢吃热的东西，不太喜欢吃凉的东西。</li> 
+                <li>精神不振，睡眠偏多。</li>               </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>阳虚体质有什么困扰？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>怕冷，尤其背、腹部。到冬天手冷过肘，足冷过膝。</li>
+                <li>没到老年，总起夜，小便多，清清白白。</li>
+                <li>阳虚没有火力，水谷转化不彻底，就会经常拉肚子。</li>
+                <li>脚跟、腰腿疼痛、下肢易肿胀。</li>
+                <li>低血压，头晕，心悸气短。</li>
+                <li>头发稀疏、脱发。</li>
+                <li>睡眠轻、容易惊醒。</li>
+                <li>黑眼圈、口唇发暗。</li>
+                <li>上热下寒：常牙痛、口臭、面红油腻、痤疮。</li>
+                 </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>我为什么会阳虚？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>熬夜，总是超过23点也不睡觉。</li>
+                <li>冷饮和凉茶是日常饮品，喜吹空调。</li>
+                <li>冬季露着膝盖穿短裙，夏季空调下穿露脐装。</li>
+                <li>过度控制饮食，营养不良。</li>
+                <li>先天禀赋不足，父母为阳虚质。</li>
+                <li>吃了太多的生冷寒凉食物或者工作环境湿冷。</li>
+                <li>长期、大量用抗生素、激素类、利尿剂、清热解毒中药等。</li>
+                <li>久病损伤阳气。</li>
+                <li>长期大量运动，或喜欢桑拿 ，出汗过度。</li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>阳虚体质更容易患哪些疾病？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>感冒：别人一有感冒，自己总是第一个被传染，多由阳气不足、卫表不固造成的。</li>
+                <li>肥胖：如果你是一个又白又软的胖子，那么减肥首先要考虑加强阳气的补养，绝对不要忍饥挨饿。</li>
+                <li>骨质疏松、风湿性关节炎：阳虚质到了更年期、老年期很容易患骨质疏松及风湿性关节炎。</li>
+                <li>关节炎、类风湿：阳虚的人容易遭受风寒湿邪的侵袭，从而导致血脉痹阻不通。</li>
+                <li>水肿：体内水液不能蒸腾，会出现小腿或脚踝水肿。</li>
+                <li>痛经、宫寒：因寒性收引，常有痛经，月经延后，甚至闭经，严重可导致宫寒不易受孕，或子宫肌瘤、卵巢囊肿、子宫膜异位。</li>
+                <li>冠心病、心率失常：有一种冠心病是因阳气不足，心（胸）阳不振，痰浊凝聚，气血瘀滞，痰浊、阴寒、瘀血痹阻心脉导致。</li>
+                <li>甲状腺功能低下：特别怕冷，特别没精神，血压低。</li>
+                <li>过敏性鼻炎、哮喘：体内寒气过重，天气变冷，或遇冷空气就喷嚏不断，发展出鼻塞，鼻息肉，甚至严重会发展到哮喘。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li  ><b>饮食调理： </b></li>
+                <li  class="my">饮食上要多吃些令身体温暖的食物：粮食类的面粉、高粱、糯米等；肉类的羊肉、牛肉、鸡肉、狗肉、鹿肉、麻雀、公鸡等；鱼类的草鱼、鲫鱼等；菜类的韭菜、芥菜、香菜、南瓜、生姜等；坚果类的核桃、松子、腰果、花生；水果类的荔枝、龙眼、桃子、大枣、核桃、桔子、樱桃等。也要适当吃些熟萝卜、白菜、芹菜、青菜，以免进补过度而上火。单独吃青菜的时候需要用些热性的调料，如：生姜、大蒜、胡椒等。黄芪、枸杞可以作为炖菜煲汤的配料。<br/>
+                寒凉食物少吃：性味寒凉之物，如兔肉、鸭肉、鸭蛋、柿子、苦瓜、冬瓜、香蕉、西瓜等，应少吃或不吃。罗汉果、金银花、菊花、薄荷也不适合吃。</li>
+                <li  ><b>中药调理：  </b></li>
+                <li  class="my">阳虚者当以补肾温阳、培本固元、强身健体为首要原则。可以补阳的中药有人参、肉桂、干姜、短梗五加、山药、茯苓、白扁豆、鹿茸、紫河车、淫羊藿、巴戟天、仙茅、杜仲、续断、肉苁蓉、锁阳、补骨脂、益智仁、菟丝子、沙苑子、蛤蚧、核桃仁、冬虫夏草、葫芦巴、韭菜子、阳起石、紫石英、海狗肾等。<br/>忌食生冷：冷饮、冰箱里刚拿出来的食物一定不要再碰，寒凉最伤脾胃。</li>
+                
+                <li  ><b>注意保暖：   </b></li>
+                <li  class="my">腹背，小腹（女孩子的子宫所在，需重点保护），腰部，脚和腿是保暖的重点。每晚烫脚，搓后腰。后腰暖融融最养肾。</li>
+                  <li  ><b>多运动：   </b></li>
+                <li  class="my">动能生阳，选择温和的运动，最好在户外阳光里。</li>
+                  <li  ><b>轻松愉快： </b></li>
+                <li  class="my">阳虚的人大多安静、内敛，所以不宜选择过于兴奋、亢奋，张扬的活动和工作。应多听轻松、活泼的音乐。</li>
+                <li  ><b>拒绝熬夜： </b></li>
+                <li  class="my">23点前睡觉是底线，子夜是养阳的最佳时机。</li>
+                 <li  ><b>关注穴位：  </b></li>  
+                <li  class="my">神阙、气海、关元、中极，艾灸、推揉都可以。</li>        </ul>
+            </div>
+        </div>
+
+        
+    </div>
+  <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+			
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+</div>
+
+
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        imgUrl = 'http://img.huofar.com/images/huofar_leaf_white.png';
+        lineLink = 'http://www.huofar.com/tizhi/?inv=16297211';
+        descContent = "仅需5分钟，快来测测吧！";
+        shareTitle = '超准！我的体质是：阳虚质';
+        appid = 'wxd89b9a911988b4fb';
+
+        wx.config({
+            appId: 'wx9b090866dd53c6e1',
+            timestamp:1487853138 ,
+            nonceStr: '43ED3ch49a7UmzSW',
+            signature: '2e9c0496e4243e3e5529ae2af902dc4fd24c5fc0',
+            jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"]
+        });
+    
+        });
+
+    </script>
+
+</body>
+</html>

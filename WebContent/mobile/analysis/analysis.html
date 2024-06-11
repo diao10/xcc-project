@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>轻妍体质测试</title>
+
+
+<!-- Bootstrap -->
+<link href="bootstrap.min.css" rel="stylesheet">
+<link href="tz.css" rel="stylesheet">
+<script src="analysis.js" type="text/javascript"></script>
+
+<style>
+.col-xs-2-5 {
+	width: 20%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+}
+</style>
+   
+  
+
+</head>
+<body>
+    <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='gun1.jpg' />
+   </div>
+	<header class="navbar navbar-static-top bs-docs-nav" id="top"
+		role="banner">
+	
+	<div class="container">
+	    
+		<h1>轻妍体质测试</h1>
+	</div>
+	</header>
+	<!-- 表单开始 -->
+	<!--<form action="/tizhi/" id="questionForm" method="POST"> -->
+
+		<div class="container question-desc">
+	       <ul>
+						<li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;《黄帝内经》中提出“上医治未病之病，中医治欲病之病，下医治已病之病”。</p></li>					
+						<li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本套体质辨识系统经过中医学者近30年的研究，由中医临床专家、流行病学专家、体质学专家多次论证，通过面诊、舌诊、问诊的科学对比归纳出一般人的综合健康风险评估状态，科学合理化制定个体干预调理方案，以求将这种潜病态消灭在萌芽状态，提高个体健康状态和生活质量。</p></li>
+						<li><span style="font-size: 15px">1、专业体质测试，5分钟测试您的健康情况</span></li>
+				     	<li><span style="font-size: 15px">2、根据最近三个月的体验和感受回答</span></li>
+				     	<li><span style="font-size: 15px">3、为准确分析，请按图例上传所需图片</span></li>	
+				     	<li><img height=160px  width="50%" src="image/s.jpg"/><img height=160px  width="50%" src="image/f.jpg"/></li>			
+				     	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					     	
+				     	<li><form role="form">舌头:<input type="file"  style="border:1px solid blue;display:inline" name="doc1" id="doc1" accept=".gif, .jpg, .jpeg, png, bmp" onchange="javascript:setImagePreview1();"></form></li>
+				     	<li><form role="form">面部:<input type="file"  style="border:1px solid blue;display:inline"name="doc2" id="doc2"  accept=".gif, .jpg, .jpeg, png, bmp" onchange="javascript:setImagePreview2();"></form></li>
+				     	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>	
+				     	<li><img id="preview1" height=-1 style="diplay:none" width="50%"/><img id="preview2" height=-1 style="diplay:none" width="50%"/></li>			
+				
+			</ul>
+		</div>
+
+		<div class="container question-container" id="questions"></div>
+		<!-- 表单提交 -->
+		<div class="container option-container">
+			<input type="submit" class="hidden-button" /> <a
+				href="javascript:void(0)" class="submit" id="submitButton"><img
+				src="image/submit.png" /></a>
+		</div>
+		<!-- 声明 -->
+		<div class="container option-statement">
+			<h4>提交代表你已接受以下声明</h4>
+			<p>
+				本测试不作为诊断和治疗的依据，对于已经医生确诊的疾病，应按照医嘱积极治疗。所提及的内容仅作为生活保健的咨询建议。如遇不适请及时就医。<br />
+				<b>本测试不适用于孕妇和乳母</b>
+			</p>
+			
+		</div>
+		
+
+		<!--copyright-->
+		
+ 
+	<div id="tool">
+	  
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="tel.png">
+					<p>一键拨号</p></a></li>			
+			<li><a href="analysis.html"><img src="guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+
+	<!-- </form> -->
+	<!-- 表单结束 -->
+	<script src="jquery-1.11.0.min.js"></script>
+	<script src="jquery.tap.js"></script>
+
+
+	<script type="text/javascript">
+      //问题设计 参数: 问题的id  标签的id  问题的内容  问题总数  选项数量 选项
+        
+      function makeQuestionHtml(questionIndex,questionTagId,questionTitle,allQuestionCount,optionNum,b1,b2,b3,b4,b5) {
+        if (optionNum == 2) {
+          var optionHtml = '<ul class="row"><li class="col-xs-6" value="1">男</li><li class="col-xs-6" value="2">女</li></ul>'+
+          '<input name="question['+questionTagId+']" type="hidden"/>';
+        } else {
+          var optionHtml = '<ul class="row"><li class="col-xs-2-5" value="1">'+b1+'</li><li class="col-xs-2-5" value="2">'+b2+'</li><li class="col-xs-2-5" value="3">'+b3+'</li><li class="col-xs-2-5" value="4">'+b4+'</li><li class="col-xs-2-5" value="5">'+b5+'</li></ul><input score="qq" name="question['+questionTagId+']"  type="hidden"/>';
+        };
+
+        var html = '<div class="question disabled" question-no="'+questionIndex+'" question-tag="'+questionTagId+'"><h3><span class="question-no"><b>'+questionIndex+'</b>/'+allQuestionCount+'</span><span class="real-title">'+questionTitle+'</span></h3><div class="question-options">'+optionHtml+'</div></div>';
+
+        return html;
+      }
+      //功能不详
+      function addSectionHeader(title,extraTag) {
+        return '<div class="section_header_placeholder" ' + extraTag + '><div class="section_header"><h2>' + title + '</h2></div></div>';
+      }
+      //判断特殊题型
+      function in_array(needle, haystack) {
+          for(var i in haystack) {
+              if(haystack[i] == needle) return true;
+          }
+          return false;
+      }
+    //设置问题可见性
+      function setQuestionVisibilityByTags(tags, isShow) {
+          $(tags).each(function(i) {
+            if (isShow) {
+              $('div[question-tag="'+tags[i]+'"]').show();
+            } else {
+              $('div[question-tag="'+tags[i]+'"]').find('input').removeAttr('checked');
+              $('div[question-tag="'+tags[i]+'"]').find('li').removeClass('active');
+              $('div[question-tag="'+tags[i]+'"]').hide().attr('class','question disabled');
+            }
+          });
+      }
+      //即时函数
+      $(function(){
+        //数据
+        
+      
+        
+       
+       
+        QuestionTagsWithTwoOptions = jQuery.parseJSON('["analysis100"]');
+	
+        QuestionTagsWithSepacilOptionName = jQuery.parseJSON('["analysis76","analysis44","analysis72","analysis53","analysis55","analysis74"]');
+
+        currentQuestion = 1;
+        allQuestionNum = questionUnsort.length;
+     
+        $(questionUnsort).each(function(i){
+          if (in_array(questionUnsort[i].tagID,QuestionTagsWithTwoOptions)) {
+        	  
+            var questionHtml = makeQuestionHtml(i+1,questionUnsort[i].tagID,questionUnsort[i].tag,allQuestionNum,2);
+          } else {
+		    if (in_array(questionUnsort[i].tagID,QuestionTagsWithSepacilOptionName))
+			  var questionHtml = makeQuestionHtml(i+1,questionUnsort[i].tagID,questionUnsort[i].tag,allQuestionNum,4,'根本不','有一点','有些','相当','非常');
+			else
+			  var questionHtml = makeQuestionHtml(i+1,questionUnsort[i].tagID,questionUnsort[i].tag,allQuestionNum,4,'没有','很少','有时','经常','总是');
+          }
+
+		  if(i == 0)
+			$('#questions').append(addSectionHeader('根据最近三个月的体验和感觉回答',''));
+          $('#questions').append(questionHtml);
+        });
+
+        $('#questions').find('.question[question-no="1"]').removeClass('disabled');
+        $('#questions').find('.question[question-no="1"]').addClass('active');
+
+        //CLICK OPTION!
+        $(".question-options li").bind('click',function() {
+
+          //控制题目显示状态
+          if ($(this).parents('.question').attr('question-no') == currentQuestion)
+          {
+            $(this).parents('.question').attr('class','question normal');
+
+            if (currentQuestion < allQuestionNum) {
+              $('#questions').find('[question-no="'+(currentQuestion+1)+'"]').attr('class','question active');
+              $(window).scrollTop($('#questions').find('[question-no="'+(currentQuestion+1)+'"]').offset().top-60);
+              $('body').find('.section_header').removeClass('fixed');
+              $(this).parents('.question').prev('.section_header').addClass('fixed');
+            };
+            
+            currentQuestion++;
+          };
+
+          //操作选项   //付分值
+          var thisTag = $(this).parents('.question').attr('question-tag');
+          $('input[name="question['+thisTag+']"]').attr("value",$(this).attr("value"));
+          $(this).parent().find('li').removeClass('active');
+          $(this).addClass('active');
+
+		  //判断男女选项
+		  if(thisTag == "analysis100")
+		  {
+			var text = ($(this).attr("value") == 1) ? '你的阴囊部位潮湿吗？' : '你带下色黄（白带颜色发黄）吗？';
+			$('div[question-tag="analysis66"]').find('h3').find('.real-title').html(text);
+		  }
+
+          maximumOffset = $('.basicinfo-container').offset().top - 70;
+        });
+
+        $(".question-options li").on('tap',function() {
+          $(this).css('background','#E57990');
+        });
+
+        $(".dontknow").on('tap',function() {
+          $(this).css('background','#AAA');
+        });
+
+        //提交，检测表单完成情况
+        $('#submitButton').click(function(){
+        	//算分数
+          var alreadyTested = $('#questions').find('input[value]').length;
+          var isErrorComing = false;
+
+          //答题完成度检测
+          
+          if (alreadyTested < allQuestionNum && !isErrorComing) {
+            if (alreadyTested == 0) {
+              $(window).scrollTop($('.question:first').offset().top);
+          
+              alert('请先完成测试再提交！');
+            } else {
+              $(window).scrollTop($('#questions').find('.question[question-no="'+(currentQuestion-1)+'"]').offset().top);
+          
+              alert('你还有题目尚未回答！');
+            }
+            isErrorComing = true;
+          }
+
+          if (isErrorComing == true) {
+            return false;
+          }
+
+          //if everything is fine, submit the form.
+           countScore();
+          //$('#questionForm').appendTo($("body")).submit();
+          
+        });
+
+        minimumOffset = $('.section_header').first().offset().top;
+
+        $(window).scroll(function(event){
+			maximumOffset = $('.option-container').offset().top - 70;
+            var currentScrollTop = $(this).scrollTop();
+            if (currentScrollTop < minimumOffset || currentScrollTop > maximumOffset) {
+              $('body').find('.section_header').removeClass('fixed');
+            } else {
+              $('.section_header:visible').each(function(){
+                if(currentScrollTop >= $(this).offset().top) {
+                  if(!$(this).hasClass('fixed')) {
+                    $('body').find('.section_header').removeClass('fixed');
+                    $(this).addClass('fixed');
+                  }
+                }
+              });
+            }
+        });
+      });
+
+    </script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+	<script>/*
+      var imgUrl = 'http://sinuohuayu.com/analysis/gun.jpg';
+      var lineLink = 'http://www.huofar.com/analysis/analysis.html';
+      var descContent = "快来看看你的体质是什么！";
+      var shareTitle = '超准中医体质测试！';
+      function shareFriend() {
+          WeixinJSBridge.invoke('sendAppMessage',{
+                                  "appid": appid,
+                                  "img_url": imgUrl,
+                                  "img_width": "640",
+                                  "img_height": "640",
+                                  "link": lineLink,
+                                  "desc": descContent,
+                                  "title": shareTitle
+                                  }, function(res) {
+                                  _report('send_msg', res.err_msg);
+                                  })
+      }
+      function shareTimeline() {
+          WeixinJSBridge.invoke('shareTimeline',{
+                                  "img_url": imgUrl,
+                                  "img_width": "640",
+                                  "img_height": "640",
+                                  "link": lineLink,
+                                  "desc": descContent,
+                                  "title": shareTitle
+                                  }, function(res) {
+                                  _report('timeline', res.err_msg);
+                                  });
+      }
+      function shareWeibo() {
+          WeixinJSBridge.invoke('shareWeibo',{
+                                  "content": descContent,
+                                  "url": lineLink,
+                                  }, function(res) {
+                                  _report('weibo', res.err_msg);
+                                  });
+      }
+
+      // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+      document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){ shareFriend(); });
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){ shareTimeline(); });
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function(argv){ shareWeibo(); });
+      }, false);*/
+    </script>
+    
+</body>
+</html>

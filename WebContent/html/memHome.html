@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../dist/css/qieqie.css">
+<link rel="stylesheet" href="../dist/css/bootstrap.css">
+<link rel="stylesheet" href="../dist/css/myMem.css">
+<script src="../dist/js/jquery-3.1.1.min.js"></script>
+<script src="../dist/js/bootstrap.min.js"></script>
+<script src="../dist/js/qieqie.js"></script>
+<style type="text/css">
+#jkzj *{ margin:0; padding:0; list-style:none;}    
+#jkzj  { top:-10px;left:20px;width:950px;height:265px; margin:30px auto; position:relative; overflow:hidden;}    
+#jkzj ul{ position:absolute; left:0; top:0;}    
+#jkzj ul li{ width:200px; height:220px; float:left;margin-top: 30px;}
+#jkzj ul li .jkzjH{margin-left: 20px;margin-top: -20px;}      
+#jkzj ul li .jkzjB{margin-top: 20px;}       
+</style>
+<script type="text/javascript">
+ window.onload=function(){    
+    var oBox=document.getElementById('jkzj');    
+    var oUl=oBox.children[0];    
+    var aLi=oUl.children;    
+    
+    //复制一份内容 ，制作出无缝的效果   
+    oUl.innerHTML+=oUl.innerHTML;    
+    oUl.style.width=aLi.length*aLi[0].offsetWidth+'px';    
+         
+    var stopKG = setInterval(go,50);
+    function go(){
+    	var l=oUl.offsetLeft-1;  //图片切换，就是移动距离
+        if(l<=-oUl.offsetWidth/2){    
+            l=0;    
+        }    
+        oUl.style.left=l+'px';   
+    }
+    //ul添加鼠标移动事件
+    oUl.onmouseover = function(){
+    	clearInterval(stopKG);
+	};
+	//鼠标离开
+	oUl.onmouseout  = function(){
+		stopKG = setInterval(go,100);
+	};
+	
+	//动态资讯
+	function Each(list, fun){
+		for (var i = 0, len = list.length; i < len; i++) { fun(list[i], i); }
+	};
+	
+	var objs = $("idNum").getElementsByTagName("li");
+	
+	                                              //滚动对象           高度        个数
+	var tv = new TransformView("idTransformView", "idSlider", 280, 4, {
+		onStart : function(){ Each(objs, function(o, i){ o.className = tv.Index == i ? "on" : ""; }) }//按钮样式
+	});
+	
+	tv.Start();
+};   
+</script>
+</head>
+<body> 
+ 	<div class="tyMain">
+		<header>
+			<div class="box">
+				<div class="logo">
+					<img alt="" src="../dist/img/hjlogo.png">
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="#">首页</a></li>
+						<li class="active"><a href="#">养生知识</a></li>
+						<li><a href="#">健康档案</a></li>
+						<li><a href="#">专家咨询</a></li>
+						<li><a href="#">体质分析</a></li>
+						<li><a href="#">个人信息</a></li>
+						<li><a href="#">会员功能</a></li>
+					</ul>
+				</div>
+			</div>	
+		</header>
+		<div class="tycg" id="tycg">
+		   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			  </ol>
+			
+			  <!-- Wrapper for slides -->
+			  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				      <img src="../dist/img/gun1.jpg" alt="宣传图1">
+				      <div class="carousel-caption">
+				        ...
+				      </div>
+				    </div>
+				    <div class="item">
+				       <img src="../dist/img/gun2.jpg" alt="宣传图2">
+				      <div class="carousel-caption">
+				        ...
+				      </div>
+				    </div>
+				    <div class="item">
+				       <img src="../dist/img/gun3.jpg" alt="宣传图3">
+				      <div class="carousel-caption">
+				        ...
+				      </div>
+				   </div>
+			  </div>
+			
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			  </a>
+			</div> 
+		</div>
+		<div class="tyMainBody">
+			<div class="row gray">
+				<div class="box">
+					<h1 class="text-center">● 服务项目 ●</h1>
+					<div class="fwxm">
+						<ul>
+							<li>1</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="box">
+					<h1 class="text-center">● 解决方案 ●</h1>
+					<div class="jjfa">
+						<ul>
+							<li>1</li>
+							<li>2</li>
+							<li>3</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row gray">
+				<div class="box">
+					<h1 class="text-center">● 健康专家 ●</h1>
+					<div class="jkzj">
+						<div id="jkzj">
+						<ul>
+							<li>
+								<div class="jkzjH">
+									<img alt="" src="../dist/img/touxiangTest.png">
+								</div>
+								<div class="jkzjB">
+									<span class="jkzjBH">
+										三叔
+									</span>
+									<span class="jkzjBB">
+										老九门，吴老狗三子
+									</span>
+								</div>
+							</li>
+							<li>
+								<div class="jkzjH">
+									<img alt="" src="../dist/img/touxiangTest.png">
+								</div>
+								<div class="jkzjB">
+									<span class="jkzjBH">
+										三叔
+									</span>
+									<span class="jkzjBB">
+										老九门，吴老狗三子
+									</span>
+								</div>
+							</li>
+							<li>
+								<div class="jkzjH">
+									<img alt="" src="../dist/img/touxiangTest.png">
+								</div>
+								<div class="jkzjB">
+									<span class="jkzjBH">
+										三叔
+									</span>
+									<span class="jkzjBB">
+										老九门，吴老狗三子
+									</span>
+								</div>
+							</li>
+						</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="box">
+					<h1 class="text-center">● 动态资讯 ●</h1>
+					<div class="dtzx">
+							<div class="dtzxB">
+								<div class="containerQ" id="idTransformView">
+								  <ul class="slider" id="idSlider">
+								    <li><img src="../dist/img/qie1.jpg"/></li>
+								    <li><img src="../dist/img/qie2.jpg"/></li>
+								    <li><img src="../dist/img/qie3.jpg"/></li>
+								    <li><img src="../dist/img/qie2.jpg"/></li>
+								  </ul>
+								  <ul class="num" id="idNum">
+								    <li>1</li>
+								    <li>2</li>
+								    <li>3</li>
+								    <li>4</li>
+								  </ul>
+								</div>
+							</div>
+							<div class="dtzxB" style="margin-left: 60px">
+								<ul class="news">
+									<li>
+										<span>2017-09-11</span>
+										<a href="#">你妹你妹你妹你妹你妹你妹你妹你妹</a>
+									</li>
+									<li>
+										<span>2017-09-11</span>
+										<a href="#">你妹你妹你妹你妹你妹你妹你妹你妹</a>
+									</li>
+									<li>
+										<span>2017-09-11</span>
+										<a href="#">你妹你妹你妹你妹你妹你妹你妹你妹</a>
+									</li>
+									<li>
+										<span>2017-09-11</span>
+										<a href="#">你妹你妹你妹你妹你妹你妹你妹你妹</a>
+									</li>
+									<li>
+										<span>2017-09-11</span>
+										<a href="#">你妹你妹你妹你妹你妹你妹你妹你妹</a>
+									</li>
+									<li>
+										<span>2017-09-11</span>
+										<a href="#">你妹你妹你妹你妹你妹你妹你妹你妹</a>
+									</li>
+									<li>
+										<span>2017-09-11</span>
+										<a href="#">你妹你妹你妹你妹你妹你妹你妹你妹</a>
+									</li>
+								</ul>
+							</div>
+							<div class="dtzxF clear">
+								<div style="float: right;margin-right: 30px;">
+									<a href="#" >更多&gt;&gt;</a>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="row gray">
+				<div class="box">
+					<h1 class="text-center">● 合作伙伴 ●</h1>
+					<div class="hzhb">
+						<ul>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+						</ul>
+						<ul>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+							<li><img src="../dist/img/hz.jpg"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="box">
+					<div class="jrwm">
+						<div class="jr">
+							<span>您想要成为健康的使者，给家人和身边的朋友带来健康吗？</span>
+							<button class="btn btn-primary btn-lg">立即注册登录</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="msg">
+				<div class="box">
+					<div class="logo">
+					</div>
+					<div class="border">
+					</div>
+					<div class="center">
+						<ul class="mu1">
+							<li>
+								<span>标题一</span>
+								<ul class="mu2">
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+								</ul>
+							</li>
+							<li>
+								<span>标题一</span>
+								<ul class="mu2">
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+								</ul>
+							</li>
+							<li>
+								<span>标题一</span>
+								<ul class="mu2">
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+								</ul>
+							</li>
+							<li>
+								<span>标题一</span>
+								<ul class="mu2">
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+									<li>xxx</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="border">
+					</div>
+					<div class="right">
+						<div class="wxxc">
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="msg2">
+				<p>关于我们 |免责声明 |广告合作 |联系方式 |友情链接 |客服中心</p>
+				<p>Copyright 2016 www.tyyy.com 版权所有   皖ICP备15018543号</p>
+				<p>技术支持：沈阳依森信息科技</p>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

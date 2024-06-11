@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.BuildingMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Building">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="building_f" jdbcType="INTEGER" property="buildingF" />
+    <result column="building_v" jdbcType="VARCHAR" property="buildingV" />
+    <result column="theme_id" jdbcType="BIGINT" property="themeId" />
+    <result column="sender" jdbcType="VARCHAR" property="sender" />
+    <result column="sender_id" jdbcType="BIGINT" property="senderId" />
+    <result column="sender_type" jdbcType="BIGINT" property="senderType" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+   
+    <result column="flag" jdbcType="BIGINT" property="flag" />
+    <result column="delet_flag" jdbcType="BIGINT" property="deleteFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, building_f, building_v, theme_id, sender, sender_id, sender_type, create_date,flag,delete_flag
+  </sql>
+  <select id ="selCount"  parameterType="com.tyyy.bean.Building"    resultType="java.lang.Integer">
+    select count(*) from ty_building where delete_flag= 0 and theme_id =#{id,jdbcType=BIGINT}
+  </select>
+   <select id ="selCountA"  parameterType="java.lang.Long"   resultType="java.lang.Integer">
+    select count(*) from ty_building where delete_flag= 0 and theme_id =#{themeId,jdbcType=BIGINT} and flag = 0  
+  </select>
+  <select id = "selBuildingAll" parameterType="java.lang.Long" resultMap="BaseResultMap">
+   	 select   <include refid="Base_Column_List" /> from ty_building where theme_id = #{id,jdbcType=BIGINT} and delete_flag = 0
+  </select>
+  <select id = "selBuildingAllA" parameterType="com.tyyy.bean.Building" resultMap="BaseResultMap">
+   	 select   <include refid="Base_Column_List" /> from ty_building where delete_flag = 0
+   	  <if test="buildingF != null and buildingF!= 0">
+        and building_f = #{buildingF,jdbcType=INTEGER}
+      </if>
+      <if test="buildingV != null and buildingV!=''">
+        and building_v like '%${buildingV}%'
+      </if>
+      <if test="theme != null and  theme != ''">
+        and theme like '%${theme}%'
+      </if>
+      <if test="sender != null and sender !=''">
+        and sender like '%${sender}%'
+      </if>
+      <if test="senderType != null and senderType!= 2">
+        and sender_type = #{senderType,jdbcType=BIGINT}
+      </if>
+      <if test="flag != null and flag != 2">
+        and flag = #{flag,jdbcType=BIGINT}
+      </if> 
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_building
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from ty_building
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update ty_building set delete_flag=1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insert" parameterType="com.tyyy.bean.Building">
+    insert into ty_building ( building_f, building_v, 
+      theme_id, sender, sender_id, flag,
+      sender_type, create_date)
+    values ( #{buildingF,jdbcType=INTEGER}, #{buildingV,jdbcType=VARCHAR}, 
+      #{themeId,jdbcType=BIGINT}, #{sender,jdbcType=VARCHAR}, #{senderId,jdbcType=BIGINT}, #{flag,jdbcType=INTEGER},
+      #{senderType,jdbcType=BIGINT}, sysdate())
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.Building">
+    insert into ty_building
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="buildingF != null">
+        building_f,
+      </if>
+      <if test="buildingV != null">
+        building_v,
+      </if>
+      <if test="themeId != null">
+        theme_id,
+      </if>
+      <if test="sender != null">
+        sender,
+      </if>
+      <if test="senderId != null">
+        sender_id,
+      </if>
+      <if test="senderType != null">
+        sender_type,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="buildingF != null">
+        #{buildingF,jdbcType=INTEGER},
+      </if>
+      <if test="buildingV != null">
+        #{buildingV,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="sender != null">
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null">
+        #{senderId,jdbcType=BIGINT},
+      </if>
+      <if test="senderType != null">
+        #{senderType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.Building">
+    update ty_building
+    <set>
+      <if test="buildingV != null">
+        building_v = #{buildingV,jdbcType=VARCHAR},
+      </if>
+      
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.Building">
+    update ty_building
+    set building_f = #{buildingF,jdbcType=INTEGER},
+      building_v = #{buildingV,jdbcType=VARCHAR},
+      theme_id = #{themeId,jdbcType=BIGINT},
+      sender = #{sender,jdbcType=VARCHAR},
+      sender_id = #{senderId,jdbcType=BIGINT},
+      sender_type = #{senderType,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   <update id ="delThem" parameterType="java.lang.Long">
+     update ty_building set delete_flag=1
+    where theme_id = #{id,jdbcType=BIGINT}
+   </update>
+</mapper>

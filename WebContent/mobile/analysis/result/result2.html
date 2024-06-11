@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：气虚质</title>  <!-- 修改点1 -->
+
+    <!-- Bootstrap -->
+   <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+  </head>
+  <body>
+  <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src=""><!-- 修改点2 logo -->
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>气虚质</h1>  <!-- 修改点3-->
+            <h3 id="other">
+               <br/>
+            </h3>
+             <script type="text/javascript">
+             function getPar(par){
+                 //获取当前URL
+                 var local_url = document.location.href; 
+                 //获取要取得的get参数位置
+                 var get = local_url.indexOf(par +"=");
+                 if(get == -1){
+                     return false;   
+                 }   
+                 //截取字符串
+                 var get_par = local_url.slice(par.length + get + 1);    
+                 //判断截取后的字符串是否还有其他get参数
+                 var nextPar = get_par.indexOf("&");
+                 if(nextPar != -1){
+                     get_par = get_par.slice(0, nextPar);
+                 }
+                 return get_par;
+             }
+             
+		    
+             
+                var bodyA2=getPar("bodyA2");
+                bodyA2= decodeURI(bodyA2);
+                 //  if(bodyA2!="倾向"){
+                     document.getElementById("other").innerText=bodyA2;
+              //   }
+                   
+            </script>
+              
+          </div>
+          <p class="typeinfo-desc">
+        根据您的体质辨识结果，建议你从气虚质开始入手调理，调节气虚质要补脾气、健肺气、固肾气。<!--span class="small-tip-2">
+          ①《中医体质分类与判定》是中华中医药学会于2009年4月9日颁布的国家标准。<br/>
+          ② 多种体质并存是多数人的状态，不必过于担心，调整生活方式是有改变的可能的。<br/>
+          <span-->
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+      
+      <!-- 修改点4-->
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm2/2.jpg" />
+                          <img src="rm2/1.jpg" />
+                          <img src="rm2/3.jpg" />
+                          <img src="rm2/4.jpeg"/>
+                          <img src="rm2/5.jpg" />
+                          <img src="rm2/6.jpg" />
+                          <img src="rm2/7.jpg" />
+                          <img src="rm2/8.jpg" />
+                          <img src="rm2/9.jpg" />
+                       
+                          
+                    </div>
+      </div>
+
+
+
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        <!-- 修改点5  内容-->
+        <div class="item active">
+            <h3>什么是气虚？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>容易累，有点懒，经常气短，出虚汗。</li>
+                <li>「人活一口气」，气虚质是肺、脾、肾功能失调，导致气的化生不足。</li> 
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>气虚体质有什么困扰？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>面色萎黄或淡白，目光少神，口淡，唇色少华。</li>
+                <li>舌苔淡白、胖嫩、边有齿痕。</li>
+                <li>头发没有光泽，易脱发。</li>
+                <li>肌肉松软，臀部下垂、乳房下垂、肚皮松软。</li>
+                <li>头晕、耳鸣、健忘。</li>
+                  <li>多汗、自汗、出虚汗 ，运动更甚。</li>
+                <li>节气变化容易感冒。</li>
+                <li>月经不调或闭经。</li>
+                <li>没食欲，消化不良，经常腹胀，大便困难。</li>
+                <li>平素气短懒言，语音低怯，精神不振，肢体容易疲乏。</li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>我为什么会气虚？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>母亲怀孕时营养不足，妊娠反应强烈持久不能进食、早产、喂养不当。或父母有一方是气虚质。</li>
+                <li>大病、久病之后，元气大伤。</li>
+                
+                <li>神过劳，长期过度用脑，劳伤心思，思虑伤脾。</li>
+                <li>形过劳，曾经是重体力劳动者或者是职业运动员。</li>
+                <li>长期节食会造成人体摄入营养不足，形成气虚。</li>
+                <li>喜欢吃冰冷寒凉、肥甘厚腻的食物且缺乏运动。</li>
+                  <li>七情郁结，不开心，尤其是吃饭时生气。</li>
+               </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>气虚体质更容易患哪些疾病？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>面部皮肤加速松弛、衰老，贫血，流产，生殖器脱垂，神经性尿频。</li>
+                <li>身体松软肥胖：气虚发胖多是吃的东西消化不掉形成痰湿，滞留皮下就是肥胖。</li>
+                <li>内脏下垂：气虚不能提升，肾、胃、子宫等内脏容易下垂。严重还会有重症肌无力。</li> 
+                 <li>慢性炎症：气虚女性一旦感染生殖系统炎症，很容易就转换成慢性。最典型就是慢性盆腔炎。</li>
+                <li>慢性疲劳综合征：活力降低，睡眠障碍，注意力不集中。肺气虚是关键因素。</li>
+                <li>鼻咽癌：气虚者经常感冒，从而导致反复鼻塞，再加上气滞于此，久之容易致病。</li> 
+                 </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li ><b>饮食调理： </b></li>
+                <li  class="my">常食益气健脾食物，比如果品类有大枣、葡萄干、苹果、龙眼肉、橙子等。蔬菜类有白扁豆、红薯、准山、莲子、白果、芡实、南瓜、包心菜、胡萝卜、土豆、莲藕、香菇等。肉食类有鸡肉、猪肚、牛肉、羊肉、鹌鹑、鹌鹑蛋等。水产类有淡水鱼、泥鳅、黄鳝等。调味类有麦芽糖、蜂蜜等。谷物类有糯米、小米、黄豆制品等。<br/>
+                            气虚者要忌食山楂、佛手柑、大蒜、香菜、胡椒、薄荷、荷叶等，少食或不食金橘、橙子、生萝卜、砂仁、菊花等。</li>
+                <li  ><b>中药调理：  </b></li>
+                <li class="my">补气的中药：人参、桂圆、覆盆子、芡实、西洋参、党参、太子参、黄芪、白术、山药、白扁豆、甘草、红枣、刺五加、绞股蓝、红景天、茯苓、薏米等。</li>
+               <li  ><b>规律运动：  </b></li>
+                <li class="my">选择缓慢的有氧运动，慢跑，瑜伽，登山，散步等。避免过度运动，加重气虚体质。</li>
+               <li  ><b>起居有常： </b></li>
+                <li class="my">谨避风寒，不要过劳。不熬夜，细嚼慢咽、七分饱。</li>
+               <li  ><b>关注穴位：  </b></li>
+                <li class="my">经常敲打足三里，益血补气又健脾。</li>
+                  <li  ><b>精神养生：  </b></li>
+                  <li class="my">遇事不要考虑过多，学会感受直觉，多移情于琴棋书画、唱歌跳舞、朋友交流。</li>
+                </ul>
+            </div>
+        </div>
+
+        
+    </div>
+
+    
+  <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+			
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+    <!--按钮操作区-->
+    
+	
+
+    <!--关注微信区-->
+    
+
+    <!--copyright-->
+   
+</div>
+
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16296648")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+   
+
+</body>
+</html>

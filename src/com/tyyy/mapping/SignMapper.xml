@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.SignMapper">
+	<resultMap id="BaseResultMap" type="com.tyyy.bean.Sign">
+		<id column="id" jdbcType="BIGINT" property="id" />
+   	 	<result column="mem_id" jdbcType="BIGINT" property="memId" />
+    	<result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+    id, mem_id, sign_time
+  	</sql>
+  	<insert id="addSign" parameterType="com.tyyy.bean.Sign">
+  	insert into ty_sign ( mem_id, sign_time)
+  	values( #{memId,jdbcType=VARCHAR}, sysdate())
+  	</insert>
+  	<insert id="addSign1" parameterType="long">
+  	insert into ty_sign ( mem_id, sign_time)
+  	values( #{id,jdbcType=VARCHAR}, sysdate())
+  	</insert>
+  	<insert id="upSign" parameterType="com.tyyy.bean.Sign">
+  		insert into ty_sign(mem_id,sign_time)
+  		values(#{memId,jdbcType=BIGINT},#{signTime,jdbcType=TIMESTAMP})
+  	</insert>
+  	<select id="selSignAll" parameterType="com.tyyy.bean.Sign" resultMap="BaseResultMap">
+  		select s.id,s.mem_id,m.mem_name,s.sign_time
+  		from ty_sign s,ty_member m
+  		where s.delete_flag = 0
+  		and s.mem_id = m.id
+  		group by s.mem_id
+  	</select>
+  	<select id="selSignById" parameterType="com.tyyy.bean.Sign" resultMap="BaseResultMap">
+  		select s.id,s.mem_id,s.sign_time,m.mem_name
+		from ty_sign s,ty_member m
+		where s.delete_flag = 0 
+		and s.id = #{id,jdbcType=BIGINT}  		
+		and s.mem_id = m.id
+		group by s.mem_id
+  	</select>
+  	<select id="selSignByMemId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  		select sign_time
+  		from ty_sign
+  		where mem_id = #{memId,jdbcType=BIGINT}
+  		group by sign_time
+  	</select>
+  	<select id="selSign" parameterType="com.tyyy.bean.Sign" resultMap="BaseResultMap">
+  		select 
+  		 <include refid="Base_Column_List" />
+  		 from ty_sign
+  		 where sign_time = #{signTime,jdbcType=TIMESTAMP}
+  		 and mem_id = #{memId,jdbcType=BIGINT}
+  		 group by mem_id
+  	</select>
+  	<update id="updateSign" parameterType="com.tyyy.bean.Sign">
+  	update ty_sign
+  	<set>
+  		<if test="mem_id!=null">
+  			mem_id=#{memId,jdbcType=BIGINT}
+  		</if>
+  		<if test="sign_time!=null">
+  			sign_time=#{signTime,sysdate()}
+  		</if>
+  		where id = #{id,jdbcType=BIGINT}
+  	</set>
+  	</update>
+  	<delete id="delSign" parameterType="com.tyyy.bean.Sign">
+  		delete from ty_sign
+  		where mem_id = #{memId,jdbcType=BIGINT}
+  	</delete>
+	<update id="scSign" parameterType="com.tyyy.bean.Sign">
+		delete from ty_sign 
+		where mem_id=#{memId,jdbcType=BIGINT}
+		and sign_time = #{signTime,jdbcType=TIMESTAMP}
+	</update>
+  </mapper>

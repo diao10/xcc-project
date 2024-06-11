@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.MemClassMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.MemClass">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="class_max" jdbcType="INTEGER" property="classMax" />
+    <result column="class_min" jdbcType="INTEGER" property="classMin" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, class_max, class_min, class_name,delete_flag
+  </sql>
+  <select id="selMemClassAll"  resultMap="BaseResultMap">
+  	select * from ty_mem_class where delete_flag=0
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_mem_class where id=#{id,jdbcType=INTEGER}
+   
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+   update ty_mem_class set delete_flag=1
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tyyy.bean.MemClass">
+    insert into ty_mem_class (class_max, class_min, 
+      class_name)
+    values ( #{classMax,jdbcType=INTEGER}, #{classMin,jdbcType=INTEGER}, 
+      #{className,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.MemClass">
+    insert into ty_mem_class
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classMax != null">
+        class_max,
+      </if>
+      <if test="classMin != null">
+        class_min,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classMax != null">
+        #{classMax,jdbcType=INTEGER},
+      </if>
+      <if test="classMin != null">
+        #{classMin,jdbcType=INTEGER},
+      </if>
+       <if test="className != null">
+        #{className,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.MemClass">
+    update ty_mem_class
+    <set>
+      <if test="classMax != null">
+        class_max = #{classMax,jdbcType=INTEGER},
+      </if>
+      <if test="classMin != null">
+        class_min = #{classMin,jdbcType=INTEGER},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.MemClass">
+    update ty_mem_class
+    set class_max = #{classMax,jdbcType=INTEGER},
+      class_min = #{classMin,jdbcType=INTEGER},
+      class_name = #{className,jdbcType=VARCHAR},
+      delete_flag=#{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

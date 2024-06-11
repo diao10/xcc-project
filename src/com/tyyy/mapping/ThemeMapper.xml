@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.ThemeMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Theme">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="delete_flag" jdbcType="BIGINT" property="deleteFlag" />
+    <result column="theme" jdbcType="VARCHAR" property="theme" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="rid" jdbcType="BIGINT" property="rid" />
+    <result column="rname" jdbcType="VARCHAR" property="rname" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="create_Date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="flag" jdbcType="BIGINT" property="flag" />
+    <result column="emp_flag" jdbcType="BIGINT" property="empFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, theme, member_id, member_name,create_Date, flag, emp_flag, delete_flag, rid, rname
+  </sql>
+  <select id="selCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+   	select count(*) from ty_theme where delete_flag = 0 and flag = 1 and member_Id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selCount2" resultType="java.lang.Integer">
+   	select count(*) from ty_theme where delete_flag = 0 and emp_flag = 1
+  </select> 
+  <select id="selCount1" parameterType="java.lang.Long" resultType="java.lang.Integer">
+   	select count(*) from ty_theme where delete_flag = 0 and flag = 2 and rid = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selThemeList" parameterType="com.tyyy.bean.Theme"   resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from ty_theme where delete_flag = 0
+      <if test="theme!= null and theme != ''">
+        and theme like '%${theme}%'
+      </if>
+      <if test="flag!=null and flag!=0">
+       and flag = #{flag,jdbcType=BIGINT}
+      </if> 
+      <if test="empFlag!=null and empFlag!=0">
+       and emp_flag = #{empFlag,jdbcType=BIGINT}
+      </if> 
+      <if test="memberName != null and memberName != ''">
+        and member_name like '%${memberName}%'
+      </if>
+      <if test="memberId != null and memberId != 0">
+        and member_id = #{memberId,jdbcType=BIGINT}
+      </if>
+      <if test="rid != null and rid != 0">
+        and rid =#{rid,jdbcType=BIGINT}
+      </if>
+  	ORDER BY emp_flag,create_Date Desc 
+  </select>
+    <select id="selThemeList1" parameterType="com.tyyy.bean.Theme"   resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from ty_theme where delete_flag = 0
+      <if test="theme!= null and theme != ''">
+        and theme like '%${theme}%'
+      </if>
+      <if test="flag!=null and flag!=0">
+       and flag = #{flag,jdbcType=BIGINT}
+      </if> 
+      <if test="memberName != null and memberName != ''">
+        and member_name like '%${memberName}%'
+      </if>
+      <if test="rid != null and rid != 0">
+      	and rid =#{rid,jdbcType=BIGINT}
+      </if>
+  	ORDER BY flag Desc,create_Date Desc 
+  </select>
+  
+  <update id="delete" parameterType="java.lang.Long">
+  	update ty_theme set delete_flag=1
+     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <delete id="del" parameterType="java.lang.Long">
+  	delete from ty_theme
+     where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from ty_theme
+    where id = #{id,jdbcType=BIGINT} and delete_flag = 0
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update ty_theme set delete_flag = 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="read" parameterType="java.lang.Long">
+    update ty_theme set flag = 2
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="read1" parameterType="java.lang.Long">
+    update ty_theme set emp_flag = 2
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insert" parameterType="com.tyyy.bean.Theme" useGeneratedKeys="true" keyProperty="id" >
+    insert into ty_theme (theme, member_id, 
+      member_name, create_Date,flag,emp_flag,rid,rname)
+    values (#{theme,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, 
+      #{memberName,jdbcType=VARCHAR},sysdate(),2, 1,#{rid,jdbcType=BIGINT}, #{rname,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.tyyy.bean.Theme">
+    insert into ty_theme
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="theme != null">
+        theme,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="createDate != null">
+        create_Date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="theme != null">
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.Theme">
+    update ty_theme
+    <set>
+      <if test="theme != null">
+        theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=BIGINT},
+      </if>
+      <if test="empFlag != null">
+        emp_flag = #{empFlag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.Theme">
+    update ty_theme
+    set theme = #{theme,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=BIGINT},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      create_Date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

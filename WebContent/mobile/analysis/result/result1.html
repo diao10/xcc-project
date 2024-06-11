@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：平和质</title>  <!-- 修改点1 -->
+
+    <!-- Bootstrap -->
+   <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+    <script type="text/javascript">
+    function getPar(par){
+        //获取当前URL
+        var local_url = document.location.href; 
+        //获取要取得的get参数位置
+        var get = local_url.indexOf(par +"=");
+        if(get == -1){
+            return false;   
+        }   
+        //截取字符串
+        var get_par = local_url.slice(par.length + get + 1);    
+        //判断截取后的字符串是否还有其他get参数
+        var nextPar = get_par.indexOf("&");
+        if(nextPar != -1){
+            get_par = get_par.slice(0, nextPar);
+        }
+        return get_par;
+    }   
+
+    </script>
+
+    
+  </head>
+  <body>  
+  <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src=""><!-- 修改点2 logo -->
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>平和质</h1>  <!-- 修改点3-->
+            <h3 id="peace">
+                <br/>
+            </h3>
+            <script>
+                var bodyA =getPar("bodyA"); 
+                bodyA= decodeURI(bodyA,"UTF-8");               
+               if(bodyA!="兼夹"&&bodyA!="false"){
+                  document.getElementById("peace").innerText=bodyA;
+                }
+            </script>
+              
+          </div>
+          <p class="typeinfo-desc">
+         平和质是一种身体和谐、自稳能力强的体质，在神、色、形、态、局部特征等方面表现良好。拥有这种体质的人，往往有比较健康的遗传背景，生活规律，情绪稳定，体重波动小，对社会和自然环境的适应能力较强，很少生病，生病之后自我康复能力强。 <!--span class="small-tip-2">
+          ①《中医体质分类与判定》是中华中医药学会于2009年4月9日颁布的国家标准。<br/>
+          ② 多种体质并存是多数人的状态，不必过于担心，调整生活方式是有改变的可能的。<br/>
+          <span-->
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+      
+      <!-- 修改点4-->
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm/1.jpg" />
+                          <img src="rm/2.jpg" />
+                          <img src="rm/3.jpg" />
+                          <img src="rm/4.jpg" />
+                          <img src="rm/5.jpg" />
+                          <img src="rm/6.jpg" />
+                          <img src="rm/7.jpg" />
+                          <img src="rm/8.jpg" />
+                          <img src="rm/平和.jpg" />
+                    </div>
+      </div>
+
+
+
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        <!-- 修改点5  内容-->
+        <div class="item active">
+            <h3>平和质有这些特征:<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>形体匀称健壮。</li>
+                <li>性格随和开朗。</li>
+                <li>肤色润泽，目光有神，鼻色明润，唇色红润，精力充沛，不易疲劳，耐受寒热，睡眠安和，胃口良好，两便正常，舌色淡红。</li>
+                <li>平和质所占人群比例约为32.75%。男性多于女性，年龄越大平和体质的人越少。</li>                </ul>
+            </div>
+        </div>
+
+        
+        
+
+        
+        <div class="item active">
+            <h3>怎么能拥有平和质？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>出生于长寿家庭。</li><li>父母善于养生。回归简单，自然而然。从小就培养了你良好的生活习惯和性格心态。</li><li>保持了良好的生活习惯，饮食健康，起居有常。</li><li>顺应四季的自然特点进行饮食穿衣。</li><li>几乎不熬夜。</li><li>懂得知足，遇烦心事先反省、不抱怨。</li><li>适度运动，不以追求肌肉为目标。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>也许你不是真正的平和质！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>别高兴太早，低头看看你的肚子！这大肚腩是健康的定时炸弹。</li><li>脸色不如年轻时候有光泽，精力也许不是那么充沛。</li><li>如果你的实际情况并不符合关于平和质的描述或者有一些异常的体检指标，请注意你的生活方式吧，你处在平和与偏颇的边缘。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li><b>合理膳食：</b></li>
+                <li class="my">饮食应清淡，不宜有偏嗜。因五味偏嗜，会破坏身体的平衡状态。</li>            
+                <li ><b>睡眠充足：</b> </li>
+                <li class="my">医学研究表明，在深度睡眠中，人体细胞可以自我修复，尤其在夜间十点到凌晨三点间的睡眠称为美容觉，可以排除体内毒素，恢复人体功能。</li>
+                <li ><b>适量运动： </b></li>
+                <li class="my">一般来说，一个人每天需要半小时的运动量，以有氧运动为好。</li>
+                <li  ><b>戒烟限酒： </b></li>
+                <li class="my">嗜烟好酒，可以积热生湿，是导致湿热质的重要成因，必须力戒烟酒。</li> 
+                <li  ><b>心态平衡：  </b></li>
+                <li class="my">任何的沮丧、焦虑都会影响正常的生活，影响我们的作息、饮食。</li>                   </ul>
+            </div>
+        </div>
+
+        
+    </div>
+
+   <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+			
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+
+
+    <!--按钮操作区-->
+    
+	
+
+    <!--关注微信区-->
+    
+
+    <!--copyright-->
+   
+</div>
+
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16296648")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+   <script>
+        imgUrl = 'gun.jpg';
+    </script>
+
+</body>
+</html>

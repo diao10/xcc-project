@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：平和质兼气郁质</title>  <!-- 修改点1 -->
+
+    <!-- Bootstrap -->
+   <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+  </head>
+  <body>
+  <div class="container question-desc">
+		<img src="../logo.jpg"class="container question-desc"style="width: 100%;">
+	</div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src=""><!-- 修改点2 logo -->
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>平和质兼气郁质</h1>  <!-- 修改点3-->
+            <h3>
+              <br/>
+            </h3>
+          </div>
+          <p class="typeinfo-desc">
+          根据你的体质情况，推荐你从平和质开始入手，配合生活方式的改变从而改善体质偏颇。<br/>
+          平和体质是一种身心和谐的表现，努力保持吧        
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+      
+      <!-- 修改点4-->
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm/1.jpg" />
+                          <img src="rm/2.jpg" />
+                          <img src="rm/3.jpg" />
+                          <img src="rm/4.jpg" />
+                          <img src="rm/5.jpg" />
+                          <img src="rm/6.jpg" />
+                          <img src="rm/7.jpg" />
+                          <img src="rm/8.jpg" />
+                          <img src="rm/平和.jpg" />
+                    </div>
+      </div>
+
+
+
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        <!-- 修改点5  内容-->
+        <div class="item active">
+            <h3><a href="result1.html">点击平和质查询</a><em></em></h3>
+        </div>
+        <div class="item active">
+            <h3><a href="result8.html">点击气郁质查询</a><em></em></h3>
+        </div>
+        <div class="item active">
+            <h3>其他体制查询<em></em></h3>
+            <div class="content">
+                <ul>
+                <li><a href="result2.html">气虚质查询</a></li>
+                <li><a href="result3.html">阳虚质查询</a></li>
+                <li><a href="result4.html">阴虚质查询</a></li>
+                <li><a href="result5.html">痰湿质查询</a></li>
+                <li><a href="result6.html">湿热质查询</a></li>
+                <li><a href="result7.html">血瘀质查询</a></li>
+                <li><a href="result9.html">特禀质查询</a></li>
+               </ul>
+            </div>
+        </div>
+
+        
+       </div>
+     <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:13514285716"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+			<li><a href="tel:13514285716"><img src="../map.png">
+					<p>联系我们</p></a></li>
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体制分析</p></a></li>
+		</ul>
+	</div> 
+
+
+</div>
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16296648")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        imgUrl = 'http://img.huofar.com/images/huofar_leaf_white.png';
+        lineLink = 'http://www.huofar.com/tizhi/?inv=16296648';
+        descContent = "仅需5分钟，快来测测吧！";
+        shareTitle = '超准！我的体质是：平和质';
+        appid = 'wxd89b9a911988b4fb';
+
+        wx.config({
+            appId: 'wx9b090866dd53c6e1',
+            timestamp:1487839612 ,
+            nonceStr: '3I4ORvhnCxpfix1u',
+            signature: 'a20b97d133512c8c19c778945a6333675a86e2e9',
+            jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"]
+        });
+    
+        });
+
+    </script>
+
+</body>
+</html>

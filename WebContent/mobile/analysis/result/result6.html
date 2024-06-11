@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：湿热质</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+
+ 
+  </head>
+  <body>
+   <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src="">
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>湿热质</h1>
+            <h3 id="other">
+              <br/>
+            </h3>
+             <script type="text/javascript">
+             function getPar(par){
+                 //获取当前URL
+                 var local_url = document.location.href; 
+                 //获取要取得的get参数位置
+                 var get = local_url.indexOf(par +"=");
+                 if(get == -1){
+                     return false;   
+                 }   
+                 //截取字符串
+                 var get_par = local_url.slice(par.length + get + 1);    
+                 //判断截取后的字符串是否还有其他get参数
+                 var nextPar = get_par.indexOf("&");
+                 if(nextPar != -1){
+                     get_par = get_par.slice(0, nextPar);
+                 }
+                 return get_par;
+             }
+             
+           
+          
+             var bodyA2=getPar("bodyA2");
+             bodyA2= decodeURI(bodyA2);
+            
+            //    if(bodyA2!="倾向"){
+                	
+                  document.getElementById("other").innerText=bodyA2;
+                  
+            //  }
+              
+            </script>
+            
+          </div>
+          <p class="typeinfo-desc">
+          根据您的体质辨识结果，建议您从湿热质开始调理，湿热体质是以清浊内蕴、阳气偏盛为主要特征的体质状态。    
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm6/1.jpg" />
+                          <img src="rm6/2.jpg" />
+                          <img src="rm6/3.jpg" />
+                          <img src="rm6/4.jpg" />
+                          <img src="rm6/5.jpg" />
+                          <img src="rm6/6.jpg" />
+                          <img src="rm6/7.jpg" />
+                          <img src="rm6/8.jpg" />
+                          <img src="rm6/9.jpg" />
+                    </div>
+      </div>
+
+
+      
+
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        
+        <div class="item active">
+            <h3>什么是湿热？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>不干净，不清爽，黏糊糊，爱长痘。</li>
+                <li>湿热质是一种内环境不清洁，又湿又热，湿热氤氲，排泄不畅的体质。</li>
+                <li>内外皆显得「浊」，不干净。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>湿热体质有什么困扰？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>脸总像洗不干净。面色发黄、发暗、油腻。</li>
+                <li>牙齿比较黄，牙龈比较红，口唇也比较红。</li>
+                <li>容易生以脓包为主的痤疮，红肿疼痛较明显。</li>
+                <li>口干、口苦、口臭。</li>
+                <li>汗味大、体味大。</li>
+                <li>大便燥结或者粘滞不爽。</li>
+                <li>小便深黄色，异味大。</li>
+                <li>容易紧张、压抑、焦虑、发怒。</li>
+                <li>如果人瘦，则身上容易生疽（深度浓肿）。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>我为什么会湿热？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>吸烟、喝酒、熬夜三者兼备。</li>
+                <li>长期情绪压抑，借酒浇愁。</li>
+                <li>肝炎病毒携带者。</li>
+                <li>总吃香辣口味，煎、烧烤、油炸食物。</li>
+                <li>长期生活在湿热环境中的人，如南方人。</li>
+                <li>过度进补。</li>
+                 </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>湿热体质更容易患哪些疾病？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>皮肤问题：脂溢性皮炎、酒糟鼻、脓包痤疮、毛囊炎、疮疖肿毒等。或者下半身皮肤真菌感染，如体癣、股癣、脚癣等。</li>
+                <li>肝胆系统疾病：携带肝炎病毒、急性黄疸型肝炎、胆结石、胆囊炎、结肠炎。</li>
+                <li>泌尿系统及生殖系统感染性疾病：在过度疲劳时较易感染膀胱炎、尿道炎、肾盂肾炎等。</li>
+                 </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li  ><b>饮食调理： </b></li>
+                <li  class="my">湿热体质的人要想改变湿热内蕴的体质状态，宜食用清凉泻火、化湿利水的食品，如薏米、带心莲子、红小豆、蚕豆、绿豆、绿豆芽、西红柿、草莓、紫菜、冬瓜、丝瓜、苦瓜、黄瓜、绿叶蔬菜、野菜、莲藕、产自北方的时令水果等。<br/>忌食辛辣油腻、温燥滋补、肥甘厚味的食物，少喝酒，少吃海鲜。辣椒、大蒜、荔枝、芒果等温热果蔬应当少吃，白酒、奶油、动物内脏、狗肉、鹿肉、牛肉、羊肉均应忌食。</li>
+                
+                <li  ><b>中药调理： </b></li>
+                <li  class="my">湿热体质的药物调养以甘淡苦寒、清热利湿的中药为主 ，如栀子、白芷、白茅根、黄连、虎杖、黄芩、马齿苋、芦根、知母、苦参、天花粉、野菊花、苦菜花、蒲公英、番泻叶、茯苓、薏苡仁、芦荟、茵陈、泽泻、玉米须、淡竹叶、赤小豆、甘草等。</li>
+                
+              <li  ><b>适度运动： </b></li>
+                <li  class="my">重点在舒展筋骨关节，增加身体柔韧度。因为筋骨关节的僵硬、涩滞不利肝胆的疏泄。<br/>不熬夜，保证睡眠时间对改善湿热体质非常重要。</li>
+                
+              <li  ><b>经络梳理： </b></li>
+                <li  class="my">首选背部膀胱经的刮痧、罐等。同时胆经，脾经上的穴位也可以多疏通。</li>
+               
+             
+                </ul>
+            </div>
+        </div>
+
+        
+    </div>
+
+    
+ <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+		
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+ </div>
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16297171")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+   
+
+</body>
+</html>

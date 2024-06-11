@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.FzMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Fz">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cd" jdbcType="VARCHAR" property="cd" />
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+    <result column="filed1" jdbcType="VARCHAR" property="filed1" />
+    <result column="filed2" jdbcType="VARCHAR" property="filed2" />
+    <result column="filed3" jdbcType="VARCHAR" property="filed3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cd, delete_flag, filed1, filed2, filed3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_fz
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selFzAll" resultMap="BaseResultMap">
+  	select
+  	cd,id from ty_fz
+  	where delete_flag = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ty_fz
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tyyy.bean.Fz">
+    insert into ty_fz (id, cd, delete_flag, 
+      filed1, filed2, filed3
+      )
+    values (#{id,jdbcType=BIGINT}, #{cd,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{filed1,jdbcType=VARCHAR}, #{filed2,jdbcType=VARCHAR}, #{filed3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.Fz">
+    insert into ty_fz
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cd != null">
+        cd,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="filed1 != null">
+        filed1,
+      </if>
+      <if test="filed2 != null">
+        filed2,
+      </if>
+      <if test="filed3 != null">
+        filed3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cd != null">
+        #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="filed1 != null">
+        #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        #{filed3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.Fz">
+    update ty_fz
+    <set>
+      <if test="cd != null">
+        cd = #{cd,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="filed1 != null">
+        filed1 = #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        filed2 = #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        filed3 = #{filed3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.Fz">
+    update ty_fz
+    set cd = #{cd,jdbcType=VARCHAR},
+    
+      filed1 = #{filed1,jdbcType=VARCHAR},
+      filed2 = #{filed2,jdbcType=VARCHAR},
+      filed3 = #{filed3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

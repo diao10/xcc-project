@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.EmpCharMapper">
+  <resultMap type="com.tyyy.bean.EmpChar" id="EmpChar">
+  	<id column="cid" property="cid"/>
+  	<result column="char_name" property="charName"/>
+  	<collection property="powerList" ofType="com.tyyy.bean.Power">
+  		<id column="pid" property="pid"/>
+  		<result column="power_name" property="powerName"/>
+  		<result column="power_Type" property="powerType"/>
+  		<result column="super_Id" property="superId"/>
+  		<result column="url" property="url"/>
+  	</collection>  
+  </resultMap>
+  <sql id="Base_Column_List">
+    cid, char_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="EmpChar">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_emp_char
+    where cid = #{cid,jdbcType=BIGINT}
+  </select>
+  <!-- 查询全部角色 -->
+  <select id="selEmpCharAll" resultMap="EmpChar">
+  	select * from ty_emp_char 
+  </select>
+   <!-- 查询全部角色 ，不包括超级管理员-->
+  <select id="selEmpChar" resultMap="EmpChar">
+  	select * from ty_emp_char where cid  &gt; 1
+  </select>
+  <!--  查询角色对权限 -->
+  <select id="selCharToPower" resultMap="EmpChar">
+  	select c.*,p.* from ty_emp_char c join ty_char_to_power ctp on c.cid=ctp.char_id	
+  	join ty_power p on ctp.power_id=p.pid
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ty_emp_char
+    where cid = #{cid,jdbcType=BIGINT}
+  </delete> 
+  <insert id="insert" parameterType="com.tyyy.bean.EmpChar">
+    insert into ty_emp_char (cid, char_name
+      )
+    values (#{cid,jdbcType=BIGINT}, #{charName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.EmpChar">
+    insert into ty_emp_char
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="charName != null">
+        char_name
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="charName != null">
+        #{charName,jdbcType=VARCHAR}
+      </if>      
+    </trim>
+  </insert>  
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.EmpChar">
+    update ty_emp_char
+    <set>
+      <if test="charName != null">
+        char_name = #{charName,jdbcType=VARCHAR}
+      </if>      
+    </set>
+    where cid = #{cid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.EmpChar">
+    update ty_emp_char
+    set char_name = #{charName,jdbcType=VARCHAR}      
+    where cid = #{cid,jdbcType=BIGINT}
+  </update>
+ <!--  清空角色对权限 -->
+  <delete id="cleanCharToPower">
+  	delete from ty_char_to_power where cid = #{cid,jdbcType=BIGINT}
+  </delete>
+ <!--  编辑角色对权限 -->
+  <!-- <insert id="addPowerToChar" parameterType="com.tyyy.bean.EmpChar">
+  	insert into ty_char_to_power(cid,char_name,power_id,power_name)
+  	values(#{cid,jdbcType=BIGINT},#{charName,jdbcType=VARCHAR},#{pid,jdbcType},
+  	#{powerName,jdbcType=VARCHAR})
+  </insert> -->
+  <!-- <insert id="addPowerToChar" parameterType="java.util.List">
+  	insert into ty_char_to_power(pid,power_name)values
+  	<foreach collection="list" item="item" separator=",">
+  		(#{item.pid},#{item.powerName})
+  	</foreach>
+  </insert> -->
+</mapper>

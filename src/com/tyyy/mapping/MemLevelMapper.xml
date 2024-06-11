@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.MemLevelMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.MemLevel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="level_min" jdbcType="INTEGER" property="levelMin" />
+    <result column="level_max" jdbcType="INTEGER" property="levelMax" />
+    <result column="level_name" jdbcType="VARCHAR" property="levelName" />
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+    <result column="delete_date" jdbcType="DATE" property="deleteDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, level_min, level_max, level_name, delete_flag, delete_date
+  </sql>
+  <select id="selectAll" parameterType="com.tyyy.bean.MemLevel" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from ty_mem_level
+  	where delete_flag = 0
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_mem_level
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    update ty_mem_level set delete_flag = 1 where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="com.tyyy.bean.MemLevel">
+    insert into ty_mem_level (id,level_min,  level_max, level_name)
+    values ( #{id,jdbcType=INTEGER},#{levelMin,jdbcType=INTEGER}, #{levelMax,jdbcType=INTEGER}, 
+      #{levelName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.MemLevel">
+    insert into ty_mem_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="levelMin != null">
+        level_min,
+      </if>
+      <if test="levelMax != null">
+        level_max,
+      </if>
+      <if test="levelName != null">
+        level_name,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="deleteDate != null">
+        delete_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="levelMin != null">
+        #{levelMin,jdbcType=INTEGER},
+      </if>
+      <if test="levelMax != null">
+        #{levelMax,jdbcType=INTEGER},
+      </if>
+      <if test="levelName != null">
+        #{levelName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.MemLevel">
+    update ty_mem_level
+    <set>
+      <if test="levelMin != null">
+        level_min = #{levelMin,jdbcType=INTEGER},
+      </if>
+      <if test="levelMax != null">
+        level_max = #{levelMax,jdbcType=INTEGER},
+      </if>
+      <if test="levelName != null">
+        level_name = #{levelName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        delete_date = #{deleteDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.MemLevel">
+    update ty_mem_level
+    set level_min = #{levelMin,jdbcType=INTEGER},
+      level_max = #{levelMax,jdbcType=INTEGER},
+      level_name = #{levelName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selLevel" resultType="com.tyyy.bean.MemLevel">
+  	select 
+  	id, level_min levelMin, level_max levelMax, level_name levelName
+  	from ty_mem_level
+  	where delete_flag = 0
+  </select>
+</mapper>

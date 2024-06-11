@@ -1,0 +1,453 @@
+<!DOCTYPE html >
+<html>
+<head>
+	<title>天蕴药业</title>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	 	 <link rel="stylesheet" href="../dist/css/bootstrap.css">
+		<link rel="stylesheet" href="../tydist/css/bootstrap-responsive.min.css" />
+		 <link rel="stylesheet" href="../tydist/css/unicorn.main.css" />
+		<link rel="stylesheet" href="../tydist/css/unicorn.grey.css" class="skin-color" />  
+            <script src="../tydist/js/unicorn.js"></script>
+            <script src="../dist/js/jquery-3.1.1.min.js"></script>
+			<script src="../tydist/js/bootstrap.m.js"></script>
+	<meta http-equiv="Contenbiaoqianyanset-Type" content="text/html; charset=utf-8" />
+	<style type="text/css">
+		/* 页码标签颜色 */
+		.pagination > .active > a
+		 {
+		  z-index: 2;
+		  color: #2a6496;
+		  cursor: default;
+		  background-color: #eeeeee;
+		  border-color: #eeeeee; 
+		}
+
+	
+	</style>
+	<script type="text/javascript">
+	//删除方法
+	function del(id) {
+	
+		var x;
+		var r=confirm("是否确认删除!");
+		if (r==true){
+			 $.ajax({
+					 data:{id:id},
+					 url:"../Employee/delEmployee",
+					 success:function(data){
+						 location.href = '${pageContext.request.contextPath }/Employee/selEmployeeAll';
+					 }
+				 })
+		}
+		else{
+			return;
+				}
+		
+		
+	}
+	//修改方法
+	function edit(id) {
+		var x;
+		var r=confirm("是否确认修改!");
+		if (r==true){
+			 
+			 $.ajax({
+					 data:{id:id},
+					 url:"../Employee/selEmployeeById",
+					 success:function(data){
+					
+						$("#qq").append("<input id='aid' name='id' style='display:none' />")
+					 $("#aid").val(data.emp.id),
+					 
+					 
+					 $("#aemp_Name").val(data.emp.emp_Name),
+					 $("#aemp_Password").val(data.emp.emp_Password),
+					 $("#aemp_Char").val(data.emp.emp_Char),
+					 $("#aemp_Gender").val(data.emp.emp_Gender),
+					 $("#aemp_Tel").val(data.emp.emp_Tel),
+					 $("#aemp_Email").val(data.emp.emp_Email),
+					 $("#aemp_Address").val(data.emp.emp_Address);
+					
+					 }
+				 })
+		}
+		else{
+			return;
+				}
+	}
+			var stu = 1;
+			function e() {
+				if(stu==1){
+					$("#Emp_Name").removeClass("glyphicon-sort-by-attributes");
+					$("#Emp_Name").addClass("glyphicon-sort-by-attributes-alt");
+					stu = 0;
+					$.ajax({
+						url:"../Employee/selEmployeeByEmpName",
+						success:function(data){
+							var len = data.rows.length;
+					 		$('#tm').html(" ");
+					 		for (var i = 0; i < len; i++) {
+						 	var d= new Date(data.rows[i].create_Date);
+							var date =d.toLocaleDateString(); 
+					 		var address = data.rows[i].emp_Address;
+					 		if(address.length>7){
+					 			address = address.substring(0,7)+"...";
+					 		}
+				 		 $('#tm').append("<tr><td>"+data.rows[i].emp_Id+"</td><td>"+data.rows[i].emp_Name+"</td><td>"+data.rows[i].emp_Password+"</td><td>"+data.rows[i].emp_Char+"</td><td>"
+									 +data.rows[i].emp_Gender+"</td><td>"+data.rows[i].emp_Tel+"</td><td>"+data.rows[i].emp_Email+"</td><td>"  +address+"</td><td>"  +date+
+									"</td><td class='action-td'><a onclick='edit("+data.rows[i].id+
+											")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-edit'></span>Edit</a>&nbsp;&nbsp;<a onclick='del("
+											+data.rows[i].id+")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-remove'></span>Remove</a></td></tr>"); 
+						} 
+						 } 
+
+					});
+				}else{
+					$("#Emp_Name").removeClass("glyphicon-sort-by-attributes-alt");
+					$("#Emp_Name").addClass("glyphicon-sort-by-attributes");
+					stu = 1;
+					$.ajax({
+						url:"../Employee/selEmployeeByNameD",
+						success:function(data){
+							var len = data.rows.length;
+					 		$('#tm').html(" ");
+					 		for (var i = 0; i < len; i++) {
+							var d= new Date(data.rows[i].create_Date)
+							var date =d.toLocaleDateString();
+					 		var address = data.rows[i].emp_Address;
+					 		if(address.length>7){
+					 			address = address.substring(0,7)+"...";
+					 		}
+					 		 $('#tm').append("<tr><td>"+data.rows[i].emp_Id+"</td><td>"+data.rows[i].emp_Name+"</td><td>"+data.rows[i].emp_Password+"</td><td>"+data.rows[i].emp_Char+"</td><td>"
+									 +data.rows[i].emp_Gender+"</td><td>"+data.rows[i].emp_Tel+"</td><td>"+data.rows[i].emp_Email+"</td><td>"  +address+"</td><td>"  +date+
+									"</td><td class='action-td'><a onclick='edit("+data.rows[i].id+
+											")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-edit'></span>Edit</a>&nbsp;&nbsp;<a onclick='del("
+											+data.rows[i].id+")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-remove'></span>Remove</a></td></tr>"); 
+						}  
+						 }
+
+					});
+				}
+			}
+			var alt = 1;
+			function c() {
+				if(alt==1){
+					$("#create_Date").removeClass("glyphicon-sort-by-attributes");
+					$("#create_Date").addClass("glyphicon-sort-by-attributes-alt");
+					alt = 0;
+					$.ajax({
+						url:"../Employee/selEmployeeByCreateDate",
+						success:function(data){
+							var len = data.rows.length;
+					 		$('#tm').html(" ");
+					 		for (var i = 0; i < len; i++) {
+							var d= new Date(data.rows[i].create_Date)
+							var date =d.toLocaleDateString();
+					 		var address = data.rows[i].emp_Address;
+					 		if(address.length>7){
+					 			address = address.substring(0,7)+"...";
+					 		}
+					 		 $('#tm').append("<tr><td>"+data.rows[i].emp_Id+"</td><td>"+data.rows[i].emp_Name+"</td><td>"+data.rows[i].emp_Password+"</td><td>"+data.rows[i].emp_Char+"</td><td>"
+									 +data.rows[i].emp_Gender+"</td><td>"+data.rows[i].emp_Tel+"</td><td>"+data.rows[i].emp_Email+"</td><td>"  +address+"</td><td>"  +date+
+									"</td><td class='action-td'><a onclick='edit("+data.rows[i].id+
+											")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-edit'></span>Edit</a>&nbsp;&nbsp;<a onclick='del("
+											+data.rows[i].id+")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-remove'></span>Remove</a></td></tr>"); 
+						}  
+						 } 
+
+					});
+				}else{
+					$("#create_Date").removeClass("glyphicon-sort-by-attributes-alt");
+					$("#create_Date").addClass("glyphicon-sort-by-attributes");
+					alt = 1;
+					$.ajax({
+						url:"../Employee/selEmployeeByCreateDateDesc",
+						success:function(data){
+							var len = data.rows.length;
+					 		$('#tm').html(" ");
+					 		for (var i = 0; i < len; i++) {
+							var d= new Date(data.rows[i].create_Date)
+							var date =d.toLocaleDateString();
+					 		var address = data.rows[i].emp_Address;
+					 		if(address.length>7){
+					 			address = address.substring(0,7)+"...";
+					 		}
+						 		 $('#tm').append("<tr><td>"+data.rows[i].emp_Id+"</td><td>"+data.rows[i].emp_Name+"</td><td>"+data.rows[i].emp_Password+"</td><td>"+data.rows[i].emp_Char+"</td><td>"
+										 +data.rows[i].emp_Gender+"</td><td>"+data.rows[i].emp_Tel+"</td><td>"+data.rows[i].emp_Email+"</td><td>"  +address+"</td><td>"  +date+
+										"</td><td class='action-td'><a onclick='edit("+data.rows[i].id+
+												")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-edit'></span>Edit</a>&nbsp;&nbsp;<a onclick='del("
+												+data.rows[i].id+")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-remove'></span>Remove</a></td></tr>"); 
+							}  
+						 } 
+
+					});
+				}
+			}
+			function s() {
+				var Name = $("#emp_Name").val();
+				var Tel = $("#emp_Tel").val();
+				var Address = $("#emp_Address").val();
+				$.ajax({
+					data:{emp_Name:Name,emp_Tel:Tel,emp_Address:Address},
+					url:"../Employee/selEmployee",
+					success:function(data){
+						var len = data.rows.length;
+				 		$('#tm').html(" ");
+				 		for (var i = 0; i < len; i++) {
+						var d= new Date(data.rows[i].create_Date)
+						var date =d.toLocaleDateString();
+						alert(Name) 
+				 		var address = data.rows[i].emp_Address;
+				 		if(address.length>7){
+				 			address = address.substring(0,7)+"...";
+				 		}
+					 		 $('#tm').append("<tr><td>"+data.rows[i].emp_Id+"</td><td>"+data.rows[i].emp_Name+"</td><td>"+data.rows[i].emp_Password+"</td><td>"+data.rows[i].emp_Char+"</td><td>"
+									 +data.rows[i].emp_Gender+"</td><td>"+data.rows[i].emp_Tel+"</td><td>"+data.rows[i].emp_Email+"</td><td>"  +address+"</td><td>"  +date+
+									"</td><td class='action-td'><a onclick='edit("+data.rows[i].id+
+											")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-edit'></span>Edit</a>&nbsp;&nbsp;<a onclick='del("
+											+data.rows[i].id+")' href='javascript:void(0)' class='btn btn-info btn-sm' ><span class='glyphicon glyphicon-remove'></span>Remove</a></td></tr>"); 
+						}  
+					} 
+				});
+			}
+	</script> 
+	</head>
+<body>
+		<div id="header">
+			<h1><a href="#">Unicorn Admin</a></h1>		
+		</div>
+		
+	 	<div id="user-nav" style="margin-top:7px;">
+               <a title=""><i class="icon icon-user"></i> <span class="text" style="font-size:15px;">欢迎  ${employeeSession.emp_Name}</span></a>
+          &nbsp; <a title="" href="#"><i class="icon icon-user"></i> <span class="text" style="font-size:15px;">退出</span></a>
+        </div> 
+            
+		<div id="sidebar">
+			<ul>
+				<li class="active"><a href="index.html"><i class="icon icon-home"></i> <span> 查看</span></a></li>
+				<li class="submenu">
+					<a href="#"><i class="iglyphicon glyphicon-th"></i> <span>表格管理</span> <span class="label">3</span></a>
+					<ul>
+						<li><a href="view/selUser.html">会员表</a></li>
+						<li><a href="selEmployee.jsp">员工表</a></li>
+						<li><a href="view/memSelPower.html">权限表</a></li>
+					</ul>
+					</li>
+				<li><a href="grid.html"><i class="icon icon-th-list"></i> <span>留言板</span></a></li>
+			</ul>
+		
+		</div>
+		
+		<div id="content">
+			<div id="content-header">
+				<h1>Tables</h1>
+			</div>
+			<div id="breadcrumb">
+				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+				<a href="#" class="current">Tables</a>
+			</div>
+			<div class="container-fluid">
+				</div><div class="row-fluid">
+					<div class="span12"  >
+						<div class="widget-box" style="height:360px;margin-top:-2px;">
+							<div class="widget-title" >
+								<span class="icon">
+									<i class="icon-th"></i>
+								</span>
+								<div style="height:60px;">
+								<!-- 表格 -->
+								<h4>Dynamic table</h4>
+								
+								<!-- 条件查询 -->
+								<div  style=" width:800px; height:35px;float:left;margin-top:8px; ">
+									<input style="height:35px;" type="text" placeholder="姓名查询" name="emp_Name" id="emp_Name"/>
+									<input style="height: 35px;" type="text" placeholder="电话查询" name="emp_Tel" id="emp_Tel"/>
+									<input style="height: 35px;" type="text" placeholder="地址查询" name="emp_Address" id="emp_Address"/>
+									<button type="submit" class="btn btn-default btn-sm" onclick="s();">
+         								<span class="glyphicon glyphicon-search"></span> 搜索
+        							</button>
+								</div>
+								
+								<div  style=" width:80px; height:35px;float:right;margin-top:12px; " >
+								 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+							          <span class="glyphicon glyphicon-plus"></span> 添加
+							    </button>
+															
+								</div>
+								
+								</div>
+							</div>
+						 	<div style="margin-top:40px;" >
+								<table id="ts" class="table table-bordered data-table" style=" width:1200px;height:35px; text-align:center;overflow:auto; vertical-align:middle;">
+									<thead  >
+									<tr style="height:10px;"  >
+									<th >编号 &nbsp;</th>
+									<th >发信人  &nbsp;<span class="glyphicon glyphicon-sort-by-attributes" id="Emp_Name" name="emp_Name" onclick="e()" style="cursor:pointer"></span></th>
+									<th >收信人  &nbsp;</th>
+									<th >主题  &nbsp;</th>
+									<th > 创建日期  &nbsp;<span class="glyphicon glyphicon-sort-by-attributes" id="create_Date" name="create_Date" onclick="c();" style="cursor:pointer"></span></th>
+									<th>操作</th>
+									</tr>
+									</thead>
+									<tbody id="tm"  >
+										<!-- <c:forEach items="${pb.list}" var="emp" >
+											<tr style="height:30px;"  >
+										
+											<td >${emp.emp_Id}</td>
+											<td>${emp.emp_Name}</td>
+											<td>${emp.emp_Password}</td>
+											<td>${emp.emp_Char}</td>
+											<td>${emp.emp_Gender}</td>
+											<td>${emp.emp_Tel}</td>
+											<td>${emp.emp_Email}</td>
+											<td >
+												<c:if test="${fn:length(emp.emp_Address)>7}">
+													<c:out value="${fn:substring(emp.emp_Address, 0, 10)}..."></c:out>
+												</c:if>
+												<c:if test="${fn:length(emp.emp_Address)<=7}">  
+                         								${emp.emp_Address}  
+                   								</c:if>  
+											</td>
+											<td >
+												<fmt:formatDate value="${emp.create_Date}" pattern="yyyy-MM-dd"/> 
+											</td>
+											<td class='action-td'>
+											<button onclick="edit(${emp.id})" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#amyModal">
+							          				<span class="glyphicon glyphicon-edit"></span>Edit
+							   				</button>
+												<a onclick="del(${emp.id})" href="javascript:void(0)" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-remove"></span>Remove</a>
+											</td>
+											</tr>
+									    </c:forEach> -->
+									</tbody> 
+									</table>  
+							</div> 
+						</div>
+						<!-- 页码 -->
+						<div id="pt" style="width:500px;height:50px;margin-left:400px;">
+							<!-- 	<%--<input  value="${pages} "/>
+									<input  value="${page} "/>
+									<input  value="${Totals} "/>
+									<input  value="${begin} "/>
+									<input  value="${end} "/> --%> -->
+				       <ul id="pagess"  class="pagination pagination-lg" style="margin-top:-8px;width:1000px; ">
+									<!--  <li  <c:if test="${page==1}">disabled</c:if>><a onclick="down()" <c:if test="${page!=1}"> href="../Employee/selEmployeeAll?page=${page-1}" </c:if>>&larr; </a></li>
+						   		 		<c:if test="${begin!=1 }"><li><a>...</a></li></c:if>
+						   		 		<c:forEach var="i" begin="${begin}" end="${end}">
+						   					<li <c:if test="${i==page }">class="active"</c:if>><a href="../Employee/selEmployeeAll?page=${i}" >${i}</a></li>
+						   				</c:forEach>
+						   				<c:if test="${end!=pages }"><li><a>...</a></li></c:if>
+						   			 <li <c:if test="${page==pages}">disabled</c:if>><a onclick="up()" <c:if test="${page!=pages}"> href="../Employee/selEmployeeAll?page=${page+1}" </c:if>> &rarr;</a></li>
+								</ul> -->
+						<ul class="pagination  pagination-lg">
+						</ul>
+					
+							</div>
+					</div>
+					<!-- 添加模态框 -->
+				</div><div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" >
+			<button type="button" style="margin-top: 10px;margin-right: 10px" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			
+          	<form id="formNewsletter"  action="../Employee/addEmployee" accept-charset="utf-8"  method="post" >
+			<div class="modal-header vertical-center" style="width: 500px;margin-left:45px;">
+                <h1 class="modal-title text-center" id="myModalLabel">添加信息</h1>
+            </div>
+            <div class="modal-body vertical-center" style="width: 400px;margin-left:70px;">
+                        <div style="width:100px;height:40px;text-align:center;font-size:25px;">收贱人:</div>
+                                <div style="margin-left:100px;margin-top:-41px;">
+                            		<input style="width:300px;height:40px;" class="form-control input-lg js-required" type="text" id="aemp_Password" name="emp_Password" value="" readonly="readonly"><br>
+                                </div>
+                                <div style="width:100px;height:40px;margin-top:15px;text-align:center;font-size:25px;">主题:</div>
+                               	<div style="margin-left:100px;margin-top:-41px;">
+                            		<input style="width:300px;height:40px;" class="form-control input-lg js-required" type="text" id="aemp_Password" name="emp_Password" value=""><br>
+                                </div>
+                                 <div style="width:100px;height:40px;margin-top:15px;text-align:center;font-size:25px;">内容:</div>
+                                <div style="margin-left:100px;margin-top:-41px;">
+                            		<input style="width:300px;height:120px;" class="form-control input-lg js-required" type="text" id="aemp_Password" name="content" value="" readonly="readonly"><br>
+                                </div>
+            </div>
+             <div class="modal-footer vertical-center" style="width: 500px;margin-left:45px;">
+            	
+                    <div >
+                    	<button  id="" class="btn btn-primary" type="submit" >确认</button>
+											<a data-dismiss="modal" class="btn btn-info " href="#">Cancel</a>
+                    </div>
+           
+            </div>
+			
+           </form>
+    
+		</div>
+	</div>
+</div>
+				<!-- 修改模态框 -->
+				<div class="modal fade" id="amyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" >
+			<button type="button" style="margin-top: 10px;margin-right: 10px" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			
+          	<form id="ff"  action="../Employee/updateEmployee" accept-charset="utf-8"  method="post" >
+			<div class="modal-header vertical-center" style="width: 500px;margin-left:45px;">
+                <h1 class="modal-title text-center" id="amyModalLabel">修改信息</h1>
+            </div>
+            <div class="modal-body vertical-center" style="width: 400px;margin-left:70px;">
+                        <div style="width:100px;height:40px;text-align:center;font-size:25px;">姓名:</div>
+                               	<div id="qq" style="margin-left:100px;margin-top:-41px;">
+                            		 <input style="width:300px;height:40px;" class="form-control input-lg js-required" type="text" id="aemp_Name" name="emp_Name" >
+                              		
+                                </div>
+                                
+                                <div style="width:100px;height:40px;margin-top:15px;text-align:center;font-size:25px;">密码:</div>
+                               	<div style="margin-left:100px;margin-top:-41px;">
+                            		<input style="width:300px;height:40px;" class="form-control input-lg js-required" type="text" id="aemp_Password" name="emp_Password" value=""><br>
+                                </div>
+                                
+                                 <div style="width:100px;height:40px;text-align:center;font-size:25px;">角色:</div>
+                               	<div style="margin-left:100px;margin-top:-41px;">
+                            		<select class="text"  name="emp_Char"  id="aemp_Char" style="width:300px;height:40px;font-size:20px;" >
+								    		<option value="1">普通</option>
+								    		<option value="2">专家</option>
+								    		<option value="3">超级管理员</option>
+							    		</select>
+                                </div>
+                                
+                                <div style="width:100px;height:40px;margin-top:20px;text-align:center;font-size:25px;">性别:</div>
+                               	<div style="margin-left:100px;margin-top:-41px;">
+                            		<select   name="emp_Gender"  id="aemp_Gender" style="width:300px;height:40px;font-size:20px;" >
+							    		<option value="男">男</option>
+							    		<option value="女">女</option>
+							    	</select>
+                                </div>
+                                
+                                <div style="width:100px;height:40px;margin-top:20px;text-align:center;font-size:25px;">电话:</div>
+                               	<div style="margin-left:100px;margin-top:-41px;">
+                            		<input style="width:300px;height:40px;" class="form-control input-lg js-required" type="text" id="aemp_Tel" name="emp_Tel" value=""><br>
+                                </div>
+                                
+                                <div style="width:100px;height:40px;text-align:center;font-size:25px;">Email:</div>
+                               	<div style="margin-left:100px;margin-top:-41px;">
+                            		 <input style="width:300px;height:40px;" class="form-control input-lg js-required" type="text" id="aemp_Email" name="emp_Email" value=""><br>
+                                </div>
+                                
+                                <div style="width:100px;height:40px;text-align:center;font-size:25px;">住址:</div>
+                               	<div style="margin-left:100px;margin-top:-41px;">
+                            		 <input style="width:300px;height:40px;" class="form-control input-lg js-required" type="text" id="aemp_Address" name="emp_Address" value=""><br>
+                                </div>
+            </div>
+             <div class="modal-footer vertical-center" style="width: 500px;margin-left:45px;">
+                    					<button  id="" class="btn btn-primary" type="submit" >确认</button>
+											<a data-dismiss="modal" class="btn btn-info " href="#">Cancel</a>
+		
+            </div>
+			
+           </form>
+    
+		</div>
+	</div>
+</div>
+			</div>
+	</body>
+</html>

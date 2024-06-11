@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：气郁质</title>
+
+    <!-- Bootstrap -->
+   <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+
+   
+  </head>
+  <body>
+  <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src="">
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>气郁质</h1>
+            <h3 id="other">
+            <br/>
+            </h3>
+             <script type="text/javascript">
+             function getPar(par){
+                 //获取当前URL
+                 var local_url = document.location.href; 
+                 //获取要取得的get参数位置
+                 var get = local_url.indexOf(par +"=");
+                 if(get == -1){
+                     return false;   
+                 }   
+                 //截取字符串
+                 var get_par = local_url.slice(par.length + get + 1);    
+                 //判断截取后的字符串是否还有其他get参数
+                 var nextPar = get_par.indexOf("&");
+                 if(nextPar != -1){
+                     get_par = get_par.slice(0, nextPar);
+                 }
+                 return get_par;
+             }
+             
+             
+       
+             var bodyA2=getPar("bodyA2");
+             bodyA2= decodeURI(bodyA2);
+             //   if(bodyA2!="倾向"){
+                  document.getElementById("other").innerText=bodyA2;
+            //  }
+            </script>
+             
+          </div>
+          <p class="typeinfo-desc">
+         根据您的体质辨识结果，建议您从气郁质开始调理，气郁的人要想调理好自己，首要问题是疏通肝气，让全身的气脉畅通，这样身体状况自然就会改善。        
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm8/8.jpg" />
+                          <img src="rm8/1.jpg" />
+                          <img src="rm8/2.jpg" />
+                          <img src="rm8/3.jpg" />
+                          <img src="rm8/4.jpg" />
+                          <img src="rm8/5.png" />
+                          <img src="rm8/6.jpg" />
+                           <img src="rm8/7.jpg" />
+                             
+                              <img src="rm8/9.jpg" />
+                               
+                                
+                          
+                    </div>
+      </div>
+
+
+     
+
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        
+        <div class="item active">
+            <h3>什么是气郁？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>敏感，忧郁，常叹息。</li>
+                <li>由于长期情志不畅、气机郁滞而形成的以性格内向不稳定、忧郁脆弱、敏感多虑为主要表现的体质。</li>
+                <li>习惯把情绪都憋在心里，表面上的平静。</li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>气郁体质有什么困扰？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>面色发黄，没有光泽。</li>
+                <li>经常莫名其妙、不由自主地叹气。</li>
+                <li>睡眠不好，心慌头晕，偏头痛。</li>
+                <li>大便干燥，慢性咽炎。</li>
+                <li>痛经、月经不调、闭经。</li>
+                <li>精神难以集中。</li>
+                <li>不思饮食或消化不良。</li>
+                <li>自己都不喜欢的古怪脾气，常在郁闷、发邪火之间摆荡。</li>
+                <li>胸胁胀痛，或走窜疼痛，或乳房胀痛。</li>
+                
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>我为什么会气郁？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>父母遗传，天生气质忧郁。</li>
+                <li>工作压力比较大：白领阶层、行政工作人员、管理人员。强势的女性最常见。</li>
+                <li>幼年曾经历过比较大的不良生活事件打击，比如单亲家庭、寄人篱下、不被重视、自信心受到打击等等。</li>
+                <li>过度要求完美，不仅对自己，而且对别人也有很多要求。</li> 
+                <li>产后气机不畅。</li>
+				</ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>气郁体质更容易患哪些疾病？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>抑郁症、焦虑症、高血压症、肿瘤、乳腺增生、乳腺癌、痛经、闭经、更年期综合症、不孕症、胃肠神经功能症、精神分裂症。</li>
+                 </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li  ><b>饮食调理：</b></li>
+                <li  class="my">少饮酒以活动血脉来提高情绪。多食行气食物，如佛手、橙子、柑皮、荞麦、韭菜、茴香菜、大蒜、高粱、刀豆等。</li>
+                <li  ><b>中药调理： </b></li>
+                <li  class="my">气郁体质之人的药物调养应以疏肝理气、调畅气机的药物为主，如柴胡、陈皮、青皮、枳实、厚朴、川楝子、乌药、荔枝核、青术香、香附、拂手、香橼、玫瑰花、绿萼梅、薤白、大腹皮、柿蒂、山楂、鸡内金、莱菔子、紫苏梗、枳壳等。</li>
+                <li  ><b>适度发泄，学习心灵迟顿 ： </b></li>
+                <li  class="my">七情波动又闷在心里，最容易伤及内脏。</li>
+                <li  ><b>早睡早起： </b></li>
+                <li  class="my">一定要早睡早起。早晨的阳光会让你感受到跃跃欲动的生机活力，而早睡是保障肝脏造血的最佳方式。</li>
+                <li  ><b>按摩身心：  </b></li>
+                <li  class="my">每天掌心击打胸口十几次，5分钟推腹法（平躺，掌根从胃口向下推至肚脐）都可以帮助你「如释重负」。</li>
+               </ul>
+            </div>
+        </div>
+
+        
+    </div>
+
+    
+   
+ <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+	  
+  
+</div>
+
+
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16297156")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    
+
+</body>
+</html>

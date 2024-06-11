@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.TisMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Tis">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tis_name" jdbcType="VARCHAR" property="tisName" />
+    <result column="tis_content" jdbcType="VARCHAR" property="tisContent" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tis_name, tis_content, create_by, create_time, delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_tis
+    where id = #{id,jdbcType=BIGINT} 
+    order by create_time desc
+  </select>
+  <select id="selTisAll" parameterType="com.tyyy.bean.Tis" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_tis
+    where delete_flag = 0
+    and tis_name like '%${tisName}%' 
+    order by create_time desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update ty_tis
+    set 
+      delete_flag =1
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tyyy.bean.Tis">
+    insert into ty_tis (id, tis_name, tis_content, 
+      create_by, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{tisName,jdbcType=VARCHAR}, #{tisContent,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR},sysdate()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.Tis">
+    insert into ty_tis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tisName != null">
+        tis_name,
+      </if>
+      <if test="tisContent != null">
+        tis_content,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tisName != null">
+        #{tisName,jdbcType=VARCHAR},
+      </if>
+      <if test="tisContent != null">
+        #{tisContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.Tis">
+    update ty_tis
+    <set>
+      <if test="tisName!= null">
+        tis_name = #{tisName,jdbcType=VARCHAR},
+      </if>
+      <if test="tisContent!=null">
+        tis_content = #{tisContent,jdbcType=VARCHAR}
+      </if>
+      
+    where id = #{id,jdbcType=BIGINT}
+    </set>
+  </update>
+  
+  <select id="selTisAlld"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_tis
+    where delete_flag = 0
+    order by create_time desc
+  </select>
+  
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Message">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="theme" jdbcType="VARCHAR" property="theme" />
+    <result column="mess_mem_id" jdbcType="BIGINT" property="messMemId" />
+    <result column="mess_mem_name" jdbcType="VARCHAR" property="messMemName" />
+    <result column="create_Date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="flag" jdbcType="BIGINT" property="flag" />
+    <result column="mess_accp_id" jdbcType="BIGINT" property="accpId" />
+    <result column="mess_accp_name" jdbcType="VARCHAR" property="accpName" />
+   <result column="delete_flag" jdbcType="BIGINT" property="deleteFlag" />
+    <result column="mess_theme" jdbcType="VARCHAR" property="mess_theme" />
+  
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, theme, mess_mem_id, mess_mem_name, create_Date, flag,mess_accp_id,mess_accp_name,mess_theme
+  </sql>
+  <!-- 前台会员全查 -->
+  <select id ="selMessAll" parameterType="java.lang.Long" resultMap="BaseResultMap">
+ 	 select <include refid="Base_Column_List" /> from ty_message where delete_flag = 0 and mess_accp_id=#{id,jdbcType=BIGINT} ORDER BY flag ,create_Date Desc  
+  </select>
+  <select id ="selMessAll1" parameterType="java.lang.Long" resultMap="BaseResultMap">
+ 	 select <include refid="Base_Column_List" /> from ty_message where delete_flag = 0 and mess_accp_id=#{id,jdbcType=BIGINT} ORDER BY flag Desc,create_Date Desc  
+  </select>
+  <!--  员工条件全查 -->
+  <select id ="empSelMessAll" parameterType="com.tyyy.bean.Message" resultMap="BaseResultMap">
+ 	 select <include refid="Base_Column_List" /> from ty_message where delete_flag = 0 
+ 	 <if test="messMemName!=null and messMemName!=''">
+ 	 	and mess_mem_name like '%${messMemName}%'
+ 	 </if>
+ 	 <if test="accpName!=null and accpName!=''">
+ 	 	and mess_accp_name like '%${accpName}%'
+ 	 </if>
+ 	 <if test="theme!=null and theme!=''">
+        and theme like '%${theme}%'
+      </if>
+      <if test="mess_theme!=null and mess_theme!=''">
+        and mess_theme like '%${mess_theme}%'
+      </if>
+      <if test="flag!=null and flag!= 0">
+        and flag= #{flag,jdbcType=BIGINT}
+      </if>
+      <if test="messMemId!=null and messMemId!=0">
+        and mess_mem_id = #{messMemId,jdbcType=BIGINT}
+      </if>
+ 	 ORDER BY flag,create_Date Desc  
+  </select>
+ 
+ <!--  记录未读信息个数 -->
+  <select id ="selCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+ 	  	select count(*) from ty_message where flag = 0 and delete_flag= 0 and mess_accp_id = #{id,jdbcType=BIGINT}
+  </select>
+   <select id ="selCount1" parameterType="java.lang.Long" resultType="java.lang.Integer">
+ 	  	select count(*) from ty_message where flag = 0 and delete_flag= 0 and mess_accp_id = #{id,jdbcType=BIGINT}
+  </select>
+  <update id="delete" parameterType="java.lang.Long">
+  		update ty_message set delete_flag = 1
+  where id = #{id,jdbcType=BIGINT}
+  </update>
+  <delete id="del" parameterType="java.lang.Long">
+  		delete from ty_message 
+       where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+   update ty_message set delete_flag = 1 
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="read" parameterType="java.lang.Long">
+   update ty_message set flag = 1 
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="read1" parameterType="java.lang.Long">
+   update ty_message set flag = 1 
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insert" parameterType="com.tyyy.bean.Message">
+    insert into ty_message (theme, mess_mem_id, 
+      mess_mem_name, create_Date,mess_theme,mess_accp_name,delete_flag,flag,mess_accp_id
+      )
+    values (#{theme,jdbcType=VARCHAR}, #{messMemId,jdbcType=BIGINT}, 
+      #{messMemName,jdbcType=VARCHAR},sysdate(),#{mess_theme,jdbcType=VARCHAR},#{accpName,jdbcType=VARCHAR},0,0,#{accpId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.Message">
+    insert into ty_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="theme != null">
+        theme,
+      </if>
+      <if test="mess_theme != null">
+        mess_theme,
+      </if>
+      <if test="messMemId != null">
+        mess_mem_id,
+      </if>
+      <if test="messMemName != null">
+        mess_mem_name,
+      </if>
+      <if test="createDate != null">
+        create_Date,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="theme != null">
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="mess_theme != null">
+        #{mess_theme,jdbcType=VARCHAR},
+      </if>
+      <if test="messMemId != null">
+        #{messMemId,jdbcType=BIGINT},
+      </if>
+      <if test="messMemName != null">
+        #{messMemName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.Message">
+    update ty_message
+    <set>
+      <if test="theme != null">
+        theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="messMemId != null">
+        mess_mem_id = #{messMemId,jdbcType=BIGINT},
+      </if>
+      <if test="messMemName != null">
+        mess_mem_name = #{messMemName,jdbcType=VARCHAR},
+      </if>
+      <if test="mess_theme != null">
+        mess_theme = #{mess_theme,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.Message">
+    update ty_message
+    set theme = #{theme,jdbcType=VARCHAR},
+      mess_mem_id = #{messMemId,jdbcType=BIGINT},
+      mess_mem_name = #{messMemName,jdbcType=VARCHAR},
+      create_Date = #{createDate,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

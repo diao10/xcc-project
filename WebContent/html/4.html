@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel='stylesheet prefetch'  href="../dist/css/xtDate.css">
+<link rel='stylesheet prefetch'  href="../dist/css/csshake.min.css">
+<script src="../dist/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="../dist/js/clock.js" type="text/javascript"></script>
+<script src="../dist/js/xtDate.js" type="text/javascript"></script>
+<script type="text/javascript">
+window.onload = function () {
+	var aa = new xtDate(document.getElementById("xtDate"));
+		//aa.tabJson = [{"type":[{"a":"1"},{"a":"2"},{"a":"3"}]},{"xlid":"cxh","qdTime":"2009-08-20"},{"xlid":"zd","xldigitid":123456,"topscore":1500,"topplaytime":"2009-11-20"}];
+		// type:10,title:[],times[]
+		var cc = {"type":2,"title":["xx1","xx2","xx3"],"times":["2017-2-13","2017-2-4","2017-2-22"]};
+		var a = [];
+		a.push();
+		var cc2 = {"type":1,"times":["2017-2-13","2017-2-4","2017-2-22"]};
+		//aa.tabJson = cc;
+		//aa.r('a',null);
+		//alert(aa.tabJson);
+		//alert(aa.r())
+		//
+		/* $.ajax({
+			url:'http://localhost:8888/tyyyTest/Member/getInserting.do',
+			data:{referrerId:1},
+			dataType:'json',
+			success:function(data){
+				
+			}
+		}); */
+	aa.init();
+		//alert(cc.title[1]);
+		/* var ss = '1486483200000';
+		var is = parseInt(ss);
+		alert(new Date(is));  */
+}
+	function bb(){
+		$('#xtDate').show();
+	}
+	function dd(){
+		$('#xtDate').hide();
+	}
+</script>
+</head>
+<body>
+	<div id="xtDate" style="width: 500px;"></div>
+	<button onclick="dd()">雾隐之术</button>
+	<button onclick="bb()">白眼开</button>
+</body>
+</html>

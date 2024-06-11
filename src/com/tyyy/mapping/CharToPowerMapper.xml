@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.CharToPowerMapper">
+  <resultMap type="com.tyyy.bean.CharToPower" id="CharToPower">
+  	<id column="id" jdbcType="BIGINT" property="id"/>
+  	<result column="cid" property="cid"/>
+  	<result column="char_name" property="charName"/>
+ 	<result column="pid" property="pid"/>
+  	<result column="power_name" property="powerName"/>
+  </resultMap> 
+  <sql id="Base_Column_List">
+    id, cid, char_name, pid, power_name
+  </sql>
+  
+  <insert id="addCharToPower" parameterType="com.tyyy.bean.CharToPower">
+    insert into ty_char_to_power (cid, char_name,pid ,power_name
+      )
+    values (#{cid,jdbcType=BIGINT}, #{charName,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{powerName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <delete id="delPower" parameterType="java.lang.Long">
+  	delete from ty_char_to_power where pid = #{pid,jdbcType=BIGINT}
+  </delete>
+   
+</mapper>

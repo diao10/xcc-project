@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：血瘀质</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+
+   
+  </head>
+  <body>
+ <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src="">
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>血瘀质</h1>
+            <h3 id="other">
+            <br/>
+            </h3>
+             <script type="text/javascript">
+             function getPar(par){
+                 //获取当前URL
+                 var local_url = document.location.href; 
+                 //获取要取得的get参数位置
+                 var get = local_url.indexOf(par +"=");
+                 if(get == -1){
+                     return false;   
+                 }   
+                 //截取字符串
+                 var get_par = local_url.slice(par.length + get + 1);    
+                 //判断截取后的字符串是否还有其他get参数
+                 var nextPar = get_par.indexOf("&");
+                 if(nextPar != -1){
+                     get_par = get_par.slice(0, nextPar);
+                 }
+                 return get_par;
+             }
+            
+          
+             var bodyA2=getPar("bodyA2");
+             bodyA2= decodeURI(bodyA2);
+            //    if(bodyA2!="倾向"){
+             document.getElementById("other").innerText=bodyA2;
+            //  }
+              
+            </script>
+              
+          </div>
+          <p class="typeinfo-desc">
+         根据您的体质辨识结果，建议您从血瘀质开始调理，血液的运行依赖于心、脾和肝。心阳可以温养脾阳，保证脾生化血液。肝有藏血的功能，在血液运行中起着调节的作用。所以，心、脾、肝三脏与血液息息相关，其中任一脏器的病变都可能影响血液的正常运行。  <!--span class="small-tip-2">
+          ①《中医体质分类与判定》是中华中医药学会于2009年4月9日颁布的国家标准。<br/>
+          ② 多种体质并存是多数人的状态，不必过于担心，调整生活方式是有改变的可能的。<br/>
+          <span-->
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm7/1.jpg" />
+                          <img src="rm7/2.jpg" />
+                          <img src="rm7/3.jpg" />
+                          <img src="rm7/4.jpeg" />
+                          <img src="rm7/5.jpeg" />
+                          <img src="rm7/7.jpg" />
+                          <img src="rm7/8.jpg" />
+                          <img src="rm7/9.jpg" />
+                          
+                    </div>
+      </div>
+
+
+    
+
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        
+        <div class="item active">
+            <h3>什么是血瘀？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>“痛则不通，通则不痛”，莫名疼痛，无缘故淤青。</li>
+                <li>血不能畅行于脉中，或溢于脉外，或瘀滞于体内。</li>
+                <li>女人好气色的主要障碍。</li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>血瘀体质有什么困扰？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>皮肤发暗发青、疼痛、干燥、瘙痒、出现小包块、色斑，因为毛细血管不通畅导致营养不能提供给皮表所致。</li>
+                <li>容易脱发，而且不好治，因为血瘀导致毛囊不能得到充足的营养供应所致。</li>
+                <li>易生斑、面色晦暗：口唇发暗、眼眶黯黑、发易脱落、眼睛有红血丝，刷牙时牙龈容易出血。</li>
+                <li>痤疮：常见难以透脓的暗紫小丘疹为主的痤疮，暗疮印（色素沉着）很难消散。</li>
+                <li>舌头上有长期不消的瘀点，严重的人舌根部静脉怒张。</li>
+                <li>健忘、记忆力下降，肝气不舒展，经常心烦易怒。</li>
+                <li>女性多见痛经、月经不调、闭经或经色紫黑有块、崩漏，经前期紧张综合症 。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>我为什么会血瘀？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>长期的肥甘厚味，反复烫发染发，喝了被污染的水，吃了被农药污染的菜。</li>
+                <li>女性月子期恶露没有完全排出，瘀血滞留体内。</li>
+                <li>七情不调，抑郁、压抑，长期不能舒展，性格敏感、消极。</li>
+                <li>曾经有过严重的外伤。</li>
+                <li>慢性病缠身，久治不愈，长期服药伤害了肝脏。</li>
+                <li>长期在寒冷的环境中生活工作，或父母遗传。</li>
+                <li>曾经以吃寒凉水果蔬菜（苦瓜、西红柿、黄瓜、西瓜、香蕉）为主食减肥，损伤阳气导致血瘀。</li>  </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>血瘀体质更容易患哪些疾病？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>紫癜、痛经、月经不调、经前乳房胀痛、宫外孕、不孕、冠心病、脑血管疾病、下肢静脉曲张、贫血、功能性子宫出血、高血压、脑血栓、心肌梗死、动脉硬化、肝硬化、脑中风、胸痹心痛、痛风、风湿病。</li>
+                <li>黄褐斑：如果年轻时痛经，又有乳腺增生或者子宫肌瘤，那么脸上通常会有斑。</li>
+                <li>肿瘤：乳腺增生、子宫肌瘤。同时还有阴虚倾向的人更容易罹患。肿瘤是体内气血津液的凝滞，是血瘀体质最典型、也是最严重的病症之一。</li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li  ><b>饮食调理：</b> </li>
+                <li  class="my">常食红糖、丝瓜、玫瑰花、月季花、酒、桃仁等活血祛瘀的食物，酒可少量常饮，醋可多吃，宜喝山楂粥、花生粥。<br/>少吃或不吃寒凉损伤脾胃阳气的食物，如：绿豆、豆腐、菠菜、空心菜、黑木耳、金针菜、芹菜、苋菜、黄瓜、西瓜、香蕉、梨、桃子等。</li>
+               
+                <li  ><b>中药调理：</b></li>
+                <li  class="my">血瘀体质的药物调养当以行气活血、化瘀散结的中药为主，常见的有丹参、红花、桃仁、阿胶、玫瑰花、代代花、茉莉花、橘皮、益母草、鸡血藤、月季花、儿茶、佛手、山楂、山药、茯苓、鸡内金、三七、茜草、蒲黄、延胡索、川芎等。</li>
+                 <li  ><b>适度运动： </b></li>
+                <li  class="my">心肺功能被唤起非常有助于消散淤血。但是中老年血瘀体质的人不宜参加剧烈、爆发、竞技的运动。</li>
+                <li  ><b>保证睡眠：  </b></li>
+                <li  class="my">早睡早起是非常重要的，血瘀主要是因为肝气不舒，最晚23点之前睡觉才能保证肝血更新。</li>
+                <li  ><b>注意心态：  </b></li>
+                <li  class="my">常和乐观开朗的人在一起参与团体活动。培养一些兴趣，让自己沉浸在一种爱好里，体会聚精会神的乐趣。</li>                </ul>
+            </div>
+        </div>
+
+        
+    </div>
+
+  
+
+
+    <!--按钮操作区-->
+    
+
+	    <!--div class="row result-ia">
+      <img src="http://img.huofar.com/logo/ia-175.png" width="85" class="logo" />
+      <h3>过日子<br/>告诉血瘀质的你应该吃什么</h3>
+      <ul>
+      	<li>每个节气更新养生热点，为你的体质量身打造；</li>
+      	<li>为家人测试体质，推荐适合全家的食物。</li>
+      </ul>
+
+	  <a href="http://huofar.cn/m/" class="download">下载过日子</a>
+    </div-->
+
+    <!--关注微信区-->
+    
+
+    <!--copyright-->
+   <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+			
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+</div>
+
+
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16296733")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    
+
+</body>
+</html>

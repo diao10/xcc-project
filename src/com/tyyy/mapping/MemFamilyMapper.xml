@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.MemFamilyMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.MemFamily">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="mem_Id" jdbcType="BIGINT" property="memId" />
+    <result column="fam_Name" jdbcType="VARCHAR" property="famName" />
+    <result column="fam_Gender" jdbcType="VARCHAR" property="famGender" />
+    <result column="delete_Flag" jdbcType="INTEGER" property="deleteFlag" />
+    <result column="fam_Birth" jdbcType="DATE" property="famBirth" />
+    <result column="mem_Name" jdbcType="VARCHAR" property="memName"/>
+    <result column="mem_level" jdbcType="INTEGER" property="memLevel"/>
+    <result column="c" jdbcType="INTEGER" property="c"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, mem_Id, fam_Name, fam_Gender, delete_Flag,fam_Birth
+  </sql>
+  <select id="selMemFamilyAll" parameterType="com.tyyy.bean.MemFamily" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from ty_mem_family 
+  	where delete_Flag=0 and mem_Id=#{memId}
+  </select>
+  <select id="selFamily" parameterType="com.tyyy.bean.MemFamily" resultMap="BaseResultMap">
+    select 
+	f.id,f.mem_id,f.fam_name,f.fam_gender,m.mem_name,f.fam_Birth
+  	from ty_mem_family f,ty_member m
+  	where f.delete_Flag=0
+  	and f.mem_id = m.id
+  	<if test="famName!=null and famName!=''">and f.fam_Name like '%${famName}%'</if>
+  	<if test="memName!=null and memName!=''">and m.mem_name like '%${memName}%'</if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select
+  	f.id,f.mem_id,f.fam_name,f.fam_gender,m.mem_name,f.fam_birth
+  	from ty_mem_family f,ty_member m
+  	where f.delete_flag=0
+  	and f.mem_id = m.id
+  	and f.id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  
+  <select id="selFamById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	SELECT m.mem_level,COUNT(*) c,m.mem_name,m.id
+	FROM ty_member m,ty_mem_family f
+	WHERE f.delete_flag = 0
+	AND m.id = f.mem_id
+	AND m.id =#{id,jdbcType=INTEGER}
+  </select>
+  
+  
+  <insert id="insert" parameterType="com.tyyy.bean.MemFamily">
+    insert into ty_mem_family ( mem_Id, fam_Name, 
+      fam_Gender,fam_Birth)
+    values ( #{memId,jdbcType=BIGINT}, #{famName,jdbcType=VARCHAR}, 
+      #{famGender,jdbcType=VARCHAR},#{famBirth,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.MemFamily">
+    insert into ty_mem_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memId != null">
+        mem_Id,
+      </if>
+      <if test="famName != null">
+        fam_Name,
+      </if>
+      <if test="famGender != null">
+        fam_Gender,
+      </if>
+      <if test="deleteFlag != null">
+        delete_Flag,
+      </if>
+      <if test="famBirth != null">
+        fam_Birth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memId != null">
+        #{memId,jdbcType=BIGINT},
+      </if>
+      <if test="famName != null">
+        #{famName,jdbcType=VARCHAR},
+      </if>
+      <if test="famGender != null">
+        #{famGender,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="famBirth != null">
+        #{famBirth,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.MemFamily">
+    update ty_mem_family
+    <set>
+      <if test="memId != null">
+        mem_Id = #{memId,jdbcType=BIGINT},
+      </if>
+      <if test="famName != null">
+        fam_Name = #{famName,jdbcType=VARCHAR},
+      </if>
+      <if test="famGender != null">
+        fam_Gender = #{famGender,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_Flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.MemFamily">
+    update ty_mem_family
+    set mem_Id = #{memId,jdbcType=BIGINT},
+      fam_Name = #{famName,jdbcType=VARCHAR},
+      fam_Gender = #{famGender,jdbcType=VARCHAR},
+      delete_Flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  	update ty_mem_family 
+	SET delete_Flag = 1
+	where id= #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

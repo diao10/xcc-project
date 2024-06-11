@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.MemDoctorMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.MemDoctor">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="flag" jdbcType="BIGINT" property="flag" />
+    <result column="doctor_name" jdbcType="VARCHAR" property="doctorName" />
+    <result column="img_id" jdbcType="VARCHAR" property="imgid" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+     <result column="shortd" jdbcType="VARCHAR" property="shortd" />
+    <result column="jobs" jdbcType="VARCHAR" property="jobs" />
+    <result column="emp_id" jdbcType="BIGINT" property="empid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, doctor_name, description, job,flag,img_id,shortd,jobs,emp_id
+  </sql>
+  <select id="selDoctor" parameterType="com.tyyy.bean.MemDoctor" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_doctor 
+    where flag = 0 
+     <if test="doctorName!=null and doctorName!=''">
+        and doctor_name like '%${doctorName}%'
+      </if>
+      <if test="job!=null and job!=''">
+        and job like '%${job}%'
+      </if>
+  </select>
+   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_doctor
+    where id = #{id,jdbcType=BIGINT} 
+  </select>
+   <select id="selectByEmpId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_doctor
+    where emp_id = #{empId,jdbcType=BIGINT} and flag = 0
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update ty_doctor set flag = 1
+    where id = #{id,jdbcType=BIGINT} and flag = 0
+ </update>
+  <insert id="insert" parameterType="com.tyyy.bean.MemDoctor">
+    insert into ty_doctor (id, doctor_name, description, 
+      job,flag,img_id,jobs,shortd,emp_id)
+    values (#{id,jdbcType=BIGINT}, #{doctorName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR},0,#{imgid,jdbcType=VARCHAR},#{jobs,jdbcType=VARCHAR},#{shortd,jdbcType=VARCHAR},#{empid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.MemDoctor">
+    insert into ty_doctor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="doctorName != null">
+        doctor_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.MemDoctor">
+    update ty_doctor
+    <set>
+      <if test="doctorName != null">
+        doctor_name = #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="shortd != null">
+        shortd = #{shortd,jdbcType=VARCHAR},
+      </if>
+      <if test="jobs != null">
+        jobs = #{jobs,jdbcType=VARCHAR},
+      </if>
+       <if test="empid != null">
+        emp_id = #{empid,jdbcType=BIGINT},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="imgid != null">
+        img_id = #{imgid,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.MemDoctor">
+    update ty_doctor
+    set doctor_name = #{doctorName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+
+</mapper>

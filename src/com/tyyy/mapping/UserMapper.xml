@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.User">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, PWD
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from A_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from A_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.tyyy.bean.User">
+    insert into A_USER (ID, NAME, PWD
+      )
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}
+      )
+      <!-- 序列自增 -->
+      <selectKey resultType="int" order="BEFORE" keyProperty="id">
+			select seq_a_user.nextval as id from dual
+		</selectKey> 
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyy.bean.User">
+    insert into A_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.User">
+    update A_USER
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.User">
+    update A_USER
+    set NAME = #{name,jdbcType=VARCHAR},
+      PWD = #{pwd,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+   <select id="selUserAll"  resultMap="BaseResultMap" >
+        select * from a_user
+
+    </select>
+</mapper>

@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：阴虚质</title>
+
+   <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+
+  
+  </head>
+  <body>
+   <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src="">
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>阴虚质</h1>
+            <h3 id="other">
+            <br/>
+            </h3>
+            <script type="text/javascript">
+             function getPar(par){
+                 //获取当前URL
+                 var local_url = document.location.href; 
+                 //获取要取得的get参数位置
+                 var get = local_url.indexOf(par +"=");
+                 if(get == -1){
+                     return false;   
+                 }   
+                 //截取字符串
+                 var get_par = local_url.slice(par.length + get + 1);    
+                 //判断截取后的字符串是否还有其他get参数
+                 var nextPar = get_par.indexOf("&");
+                 if(nextPar != -1){
+                     get_par = get_par.slice(0, nextPar);
+                 }
+                 return get_par;
+             }
+             var bodyA2=getPar("bodyA2");
+             bodyA2= decodeURI(bodyA2);
+             
+              //  if(bodyA2!="倾向"){
+                  document.getElementById("other").innerText=bodyA2;
+             // }                
+            </script>
+            
+          </div>
+          <p class="typeinfo-desc">
+         根据您的体质辨识结果，建议你从阴虚质开始调理，阴虚质的人由于体内津液精血等阴液亏少，故补水滋阴才是根本。      
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm4/1.jpg" />
+                          <img src="rm4/2.jpg" />
+                          <img src="rm4/3.jpg" />
+                          <img src="rm4/4.jpg" />
+                          <img src="rm4/5.jpg" />
+                          <img src="rm4/6.jpg" />
+                          <img src="rm4/7.jpg" />
+                          <img src="rm4/8.jpg" />
+                          <img src="rm4/9.jpg" />
+                    </div>
+      </div>
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        
+        <div class="item active">
+            <h3>什么是阴虚？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>手足心热，平素易口燥咽干，鼻微干，口渴喜冷饮，大便干燥。</li>
+                <li>阴虚质是指人体精、血等阴液亏损，失去润泽脏腑、滋养经脉肌肤的功用，出现虚火上炎的偏颇。</li>
+                <li>血属于阴，女性一生中要消耗阴血，比较容易形成阴虚质。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>阴虚体质有什么困扰？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>五心烦热，手心、足心、胸中发热，喜欢光脚踩在凉凉的地板上。</li>
+                <li>易口燥咽干，口渴，爱喝凉水和冷饮。</li>
+                <li>口臭，口腔溃疡。舌红少津少苔。</li>
+                <li>大便干燥，小便短赤。</li>
+                <li>闭经，性冷淡。</li>
+                <li>肌肤苍白或红，常有烘热感，面色潮红。</li>
+                <li>眼睛发干，红血丝多、浑浊，视物模糊，眩晕耳鸣。</li>
+                <li>睡眠差，睡眠时间短，盗汗。</li>
+                <li>缺少耐心，急躁易怒。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>我为什么会阴虚？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>先天禀赋，父母遗传。</li><li>情绪长期压抑不舒展。不能正常发泄会郁结而化火，化火就会向身体内部燃烧消耗，使阴精暗耗。</li><li>长期心脏功能不好，或高血压病人吃利尿药太多。</li><li>长期食用辛辣燥热的食品。</li><li>经常熬夜。</li><li>过多服用利尿药或清热利湿方剂。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>阴虚体质更容易患哪些疾病？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>慢性咽炎、习惯性便秘、更年期综合症、结核病、支气管扩张。</li>
+                <li>肿瘤：如果阴虚质的人长期情绪压抑间夹血瘀倾向，易患肿瘤。</li>
+                <li>红斑狼疮：患者 80% 以上是女性。比较聪明漂亮，相对优秀，好胜心强的女性更要注意。</li>
+                <li>甲状腺功能亢进：中医的阴虚火旺之症，人情绪亢奋，容易激动，睡眠不佳。</li>
+                <li>阴虚失眠：多由于肝血不足所导致的。主要表现为心烦、盗汗、口干、口渴、心悸等。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li  ><b>饮食调理： </b></li>
+                <li  class="my">多食梨、百合、银耳、木瓜、菠菜、无花果、冰糖、茼蒿等甘凉滋润食物，喝沙参粥、百合粥、枸杞粥、桑椹粥、山药粥。少吃葱、姜、蒜、椒等辛辣燥烈品。</li>
+               
+                <li  ><b>中药调理： </b></li>
+                <li  class="my">可用滋阴清热、滋养肝肾之品，北沙参、南沙参、冬、天冬、石斛、玉竹、黄精、明党参、枸杞子、墨旱莲、女贞子、五味子、乌梅、桑葚、黑芝麻、龟甲、鳖甲、燕窝、海参、鸡子黄等。</li>
+                 <li  ><b>不要过度运动，避免出汗太多： </b></li>
+                <li  class="my">阴虚体质可能会较早出现关节不利涩滞，进入中年后不要经常做磨损膝关节的运动（下楼梯、登山、步机）。不宜夏练三伏，冬练三九。</li>
+                <li  ><b>拒绝熬夜： </b></li>
+                <li  class="my">23点前睡觉是底线。熬夜消耗肝血，自然阴虚火旺。</li>
+                <li  ><b>平心静气：  </b></li> 
+                <li  class="my">注意自己的情绪，时刻提醒自己保持淡定。少抱怨、少发火。</li>              </ul>
+            </div>
+        </div>
+
+        
+    </div>
+
+ <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:13514285716"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+		
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+	
+</div>
+
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16297199")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+   
+
+</body>
+</html>

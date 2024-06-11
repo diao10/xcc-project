@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.Employee">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="emp_Id" jdbcType="VARCHAR" property="emp_Id" />
+    <result column="emp_Name" jdbcType="VARCHAR" property="emp_Name" />
+    <result column="emp_Password" jdbcType="VARCHAR" property="emp_Password" />
+    <result column="emp_Char" jdbcType="BIGINT" property="emp_Char" />
+    <result column="emp_Gender" jdbcType="VARCHAR" property="emp_Gender" />
+    <result column="emp_Tel" jdbcType="VARCHAR" property="emp_Tel" />
+    <result column="emp_Email" jdbcType="VARCHAR" property="emp_Email" />
+    <result column="emp_Address" jdbcType="VARCHAR" property="emp_Address" />
+    <result column="filed1" jdbcType="VARCHAR" property="filed1" />
+    <result column="filed2" jdbcType="VARCHAR" property="filed2" />
+    <result column="filed3" jdbcType="VARCHAR" property="filed3" />
+    <result column="delete_Flag" jdbcType="INTEGER" property="delete_Flag" />
+    <result column="create_Date" jdbcType="TIMESTAMP" property="create_Date" />
+    <result column="remember" jdbcType="INTEGER" property="remember" />
+     <result column="emp_Admin" jdbcType="VARCHAR" property="emp_Admin" />
+     <collection property="charList" ofType="com.tyyy.bean.EmpChar">
+  		<id column="cid" property="cid"/>
+  		<result column="char_name" property="charName"/>
+  	</collection>  
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,  emp_Id, emp_Name, emp_Password, emp_Char, emp_Gender, emp_Tel, emp_Email, emp_Address, 
+    delete_flag, create_Date,emp_Admin
+  </sql>
+  <select id="selEmployeeAll" parameterType="com.tyyy.bean.Employee" resultMap="BaseResultMap">
+    select 
+    c.*,e.*
+    from ty_employee e,ty_emp_char c
+    where emp_Char!=1 and delete_flag=0 and id  &gt; 1 and e.emp_char=c.cid
+   		 <if test="emp_Name!=null">and emp_Name like '%${emp_Name}%'</if>
+ 		<if test="emp_Tel!=null">and emp_Tel like '%${emp_Tel}%'</if>
+ 		<if test="emp_Address!=null">and emp_Address like '%${emp_Address}%'</if>
+ 		order by emp_Name
+ 		<if test="desc_Type==2">desc</if>
+ 		,create_Date
+ 		<if test="date_desc==4">desc</if>
+  </select>
+  <select id="selEmpByEid" parameterType="java.lang.String" resultType="int">
+    select 
+    count(*)
+    from ty_employee
+    where delete_flag=0 and emp_Id=#{emp_Id,jdbcType=VARCHAR};
+  </select>
+  <delete id="delEmployee" parameterType="java.lang.Long">
+   update ty_employee set delete_flag=1,delete_date=sysdate() where id=#{id,jdbcType=BIGINT} 
+  </delete>
+ 
+  <update id="updateEmployee" parameterType="com.tyyy.bean.Employee">
+    update ty_employee
+    <set>
+      <if test="emp_Id != null">
+        emp_Id = #{emp_Id,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_Name != null">
+        emp_Name = #{emp_Name,jdbcType=VARCHAR},</if>
+      <if test="emp_Password != null">
+        emp_Password = #{emp_Password,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_Char != null">
+        emp_Char = #{emp_Char,jdbcType=BIGINT},
+      </if>
+      <if test="emp_Gender != null">
+        emp_Gender = #{emp_Gender,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_Tel != null">
+        emp_Tel = #{emp_Tel,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_Email != null">
+        emp_Email = #{emp_Email,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_Address != null">
+        emp_Address = #{emp_Address,jdbcType=VARCHAR},
+      </if>
+      <if test="filed1 != null">
+        filed1 = #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        filed2 = #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        filed3 = #{filed3,jdbcType=VARCHAR},
+      </if>
+      <if test="delete_Flag != null">
+        delete_flag = #{delete_Flag,jdbcType=INTEGER},
+      </if>
+      <if test="create_Date != null">
+        create_Date = #{create_Date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emp_Admin != null">
+        emp_Admin = #{emp_Admin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  	 <select id="selEmployeeById" parameterType="long" resultType="com.tyyy.bean.Employee">
+ 		select * from ty_employee where id=#{id,jdbcType=BIGINT}
+ 	 </select>
+ 	 
+  	<select id="login" parameterType="com.tyyy.bean.Employee"   resultMap="BaseResultMap">
+		select * from TY_Employee where emp_Admin=#{emp_Admin,jdbcType=VARCHAR} and emp_Password=#{emp_Password,jdbcType=VARCHAR} and delete_flag=0
+	</select>
+	
+	 <insert id="addEmployee" parameterType="com.tyyy.bean.Employee">
+		insert into TY_Employee(emp_Id,emp_Name,emp_Password,emp_Char,emp_Gender ,
+		emp_Tel,emp_Email,emp_Address,emp_Admin) values (#{emp_Id,jdbcType=VARCHAR},#{emp_Name,jdbcType=VARCHAR},#{emp_Password,jdbcType=VARCHAR},
+		#{emp_Char,jdbcType=BIGINT},
+		#{emp_Gender,jdbcType=VARCHAR}, 
+		#{emp_Tel},#{emp_Email},#{emp_Address},#{emp_Admin})
+	</insert>
+	<select id="selAdmin" parameterType="java.lang.String" resultType="int">
+      select count(*) from TY_Employee where  emp_Admin=#{emp_Admin,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyyy.dao.MemHealthMapper">
+  <resultMap id="BaseResultMap" type="com.tyyy.bean.MemHealth">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="mem_Id" jdbcType="BIGINT" property="memId" />
+    <result column="mem_Name" jdbcType="VARCHAR" property="memName" />
+    <result column="mem_Type" jdbcType="VARCHAR" property="mem_Type" />
+    <result column="diag_Date" jdbcType="TIMESTAMP" property="diag_Date" />
+    <result column="diag_Ill" jdbcType="VARCHAR" property="diag_Ill" />
+    <result column="diag_Hos" jdbcType="VARCHAR" property="diag_Hos" />
+    <result column="medication" jdbcType="VARCHAR" property="medication" />
+    <result column="diag_opinion" jdbcType="VARCHAR" property="diag_opinion" />
+    <result column="upload_Date" jdbcType="DATE" property="upload_Date" />
+    <result column="aegrotat_url" jdbcType="VARCHAR" property="aegrotat_url" />
+    <result column="filed1" jdbcType="VARCHAR" property="filed1" />
+    <result column="filed2" jdbcType="VARCHAR" property="filed2" />
+    <result column="filed3" jdbcType="VARCHAR" property="filed3" />
+    <result column="delete_Flag" jdbcType="INTEGER" property="delete_Flag" />
+    <result column="fam_Name" jdbcType="INTEGER" property="fam_Name" />
+    <result column="fam_Id" jdbcType="INTEGER" property="fam_Id" />
+  </resultMap>
+ <sql id="Base_Column_List">
+    id, mem_Id, mem_Name, mem_Type, diag_Date, diag_Ill, diag_Hos, medication, diag_opinion, 
+    upload_Date, aegrotat_url, filed1, filed2, filed3, delete_Flag,fam_Name,fam_Id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ty_mem_health
+    where id = #{id,jdbcType=BIGINT}
+    and delete_flag = 0
+  </select>
+  <select id="selectMemHealth" parameterType="com.tyyy.bean.MemHealth" resultMap="BaseResultMap">
+  	select  id,mem_Id,mem_Name,mem_Type,diag_Date,diag_Ill,diag_Hos,medication,diag_opinion from ty_mem_health  where delete_flag = 0 and mem_Id=#{memId} and mem_Type='会员'
+  </select>
+  
+  <select id="selectMemHealthAll" parameterType="com.tyyy.bean.MemHealth" resultMap="BaseResultMap">
+  	select  id,mem_Id,mem_Name,mem_Type,diag_Date,diag_Ill,diag_Hos,medication,diag_opinion,upload_Date,aegrotat_url,fam_Name
+  	from ty_mem_health  
+  	where delete_flag = 0
+  	<if test="memName!=null and memName!=''">and mem_Name like '%${memName}%'</if>
+  	<if test="diag_Hos!=null and diag_Hos!=''">and diag_Hos like '%${diag_Hos}%'</if>
+	<if test="diag_Ill!=null and diag_Ill!=''">and diag_Ill like '%${diag_Ill}%'</if>
+  	<if test="fam_Name!=null and fam_Name!=''">and fam_name like '%${fam_Name}%'</if>
+  	
+  </select>
+  <select id="selectMemHealthA" parameterType="com.tyyy.bean.MemHealth" resultMap="BaseResultMap">
+  	select  id,mem_Id,mem_Name,mem_Type,diag_Date,diag_Ill,diag_Hos,medication,diag_opinion,upload_Date,aegrotat_url,fam_Name
+  	from ty_mem_health  
+  	where delete_flag = 0
+  	and mem_Type='会员'
+  	<if test="mem_Name!=null and mem_Name!=''">and mem_Name like '%${mem_Name}%'</if>
+  </select>
+  <!-- <select id="selMemName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select id,mem_Id,mem_Name,mem_Type,diag_Date,diag_Ill,diag_Hos,medication,diag_opinion,upload_Date,aegrotat_url,fam_Name
+  	from ty_mem_health
+  	where delete_flag = 0
+  	<if test="mem_Name != null">
+        mem_Name like  '%${mem_Name}%'
+      </if>
+  </select> -->
+  <select id="selMemName" parameterType="java.lang.String" resultType="com.tyyy.bean.MemHealth">
+  	select mem_Name
+  	from ty_mem_health  
+  	where delete_flag = 0
+  	and mem_Name like CONCAT('%', #{mem_Name}, '%')  
+  </select>
+  
+  <select id="selectFamHealth" parameterType="com.tyyy.bean.MemHealth" resultMap="BaseResultMap">
+  	select  id,mem_Id,mem_Name,mem_Type,diag_Date,diag_Ill,diag_Hos,medication,diag_opinion from ty_mem_health  where delete_flag = 0 and mem_Id=#{memId} and mem_Type='家属'
+  </select>
+  <select id="selByFamId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select id,mem_Id,mem_Name,mem_Type,diag_Date,diag_Ill,diag_Hos,medication,diag_opinion,fam_Id from ty_mem_health  where delete_flag = 0 and mem_Type='家属' and fam_Id=#{fam_Id} 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+	 	update ty_mem_health set delete_flag=1 where id=#{id,jdbcType=BIGINT}
+	 </delete>
+	 
+   <insert id="insertSelective" parameterType="com.tyyy.bean.MemHealth">
+    insert into ty_mem_health (mem_Id, mem_Name, mem_Type,diag_Date, diag_Ill, diag_Hos,medication, diag_opinion,fam_Name)
+    values ((select mem_Id from ty_mem_health where mem_Name = #{mem_Name}), #{mem_Name,jdbcType=VARCHAR},#{mem_Type,jdbcType=VARCHAR}, 
+      #{diag_Date,jdbcType=TIMESTAMP}, #{diag_Ill,jdbcType=VARCHAR}, #{diag_Hos,jdbcType=VARCHAR}, 
+      #{medication,jdbcType=VARCHAR}, #{diag_opinion,jdbcType=VARCHAR})
+  </insert>
+   <insert id="addMemHealth" parameterType="com.tyyy.bean.MemHealth">
+    insert into ty_mem_health
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      
+       <if test="memId != null">
+        mem_Id,
+      </if> 
+      <if test="memName != null">
+        mem_Name,
+      </if>
+      <if test="mem_Type != null">
+        mem_Type,
+      </if>
+     
+      <if test="fam_Id != null">
+        fam_Id,
+      </if>
+      <if test="diag_Date != null">
+        diag_Date,
+      </if>
+      <if test="diag_Ill != null">
+        diag_Ill,
+      </if>
+      <if test="diag_Hos != null">
+        diag_Hos,
+      </if>
+      <if test="medication != null">
+        medication,
+      </if>
+      <if test="diag_opinion != null">
+        diag_opinion,
+      </if>
+      <if test="upload_Date != null">
+        upload_Date,
+      </if>
+      <if test="aegrotat_url != null">
+        aegrotat_url,
+      </if>
+      <if test="filed1 != null">
+        filed1,
+      </if>
+      <if test="filed2 != null">
+        filed2,
+      </if>
+      <if test="filed3 != null">
+        filed3,
+      </if>
+      <if test="delete_Flag != null">
+        delete_Flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memId != null">
+        #{memId,jdbcType=BIGINT},
+      </if>
+      <if test="memName != null">
+        #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="mem_Type != null">
+        #{mem_Type,jdbcType=VARCHAR},
+      </if>
+      
+       <if test="fam_Id != null">
+        #{fam_Id,jdbcType=INTEGER},
+      </if>
+      <if test="diag_Date != null">
+        #{diag_Date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diag_Ill != null">
+        #{diag_Ill,jdbcType=VARCHAR},
+      </if>
+      <if test="diag_Hos != null">
+        #{diag_Hos,jdbcType=VARCHAR},
+      </if>
+      <if test="medication != null">
+        #{medication,jdbcType=VARCHAR},
+      </if>
+      <if test="diag_opinion != null">
+        #{diag_opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="upload_Date!= null">
+       #{upload_Date,jdbcType=DATE},
+      </if>
+      <if test="aegrotat_url != null">
+        #{aegrotat_url,jdbcType=VARCHAR},
+      </if>
+      <if test="filed1 != null">
+        #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        #{filed3,jdbcType=VARCHAR},
+      </if>
+      <if test="delete_Flag != null">
+        #{delete_Flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+   <insert id="addMemhealth" parameterType="com.tyyy.bean.MemHealth">
+    insert into ty_mem_health
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      
+       <if test="memId != null">
+        mem_Id,
+      </if> 
+      <if test="memName != null">
+        mem_Name,
+      </if>
+      <if test="mem_Type != null">
+        mem_Type,
+      </if>
+      
+      <if test="fam_Id != null">
+        fam_Id,
+      </if>
+      <if test="diag_Date != null">
+        diag_Date,
+      </if>
+      <if test="diag_Ill != null">
+        diag_Ill,
+      </if>
+      <if test="diag_Hos != null">
+        diag_Hos,
+      </if>
+      <if test="medication != null">
+        medication,
+      </if>
+      <if test="diag_opinion != null">
+        diag_opinion,
+      </if>
+      <if test="upload_Date != null">
+        upload_Date,
+      </if>
+      <if test="aegrotat_url != null">
+        aegrotat_url,
+      </if>
+      <if test="filed1 != null">
+        filed1,
+      </if>
+      <if test="filed2 != null">
+        filed2,
+      </if>
+      <if test="filed3 != null">
+        filed3,
+      </if>
+      <if test="delete_Flag != null">
+        delete_Flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memId != null">
+        #{memId,jdbcType=BIGINT},
+      </if>
+      <if test="memName != null">
+        #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="mem_Type != null">
+        #{mem_Type,jdbcType=VARCHAR},
+      </if>
+       
+       <if test="fam_Id != null">
+        #{fam_Id,jdbcType=INTEGER},
+      </if>
+      <if test="diag_Date != null">
+        #{diag_Date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diag_Ill != null">
+        #{diag_Ill,jdbcType=VARCHAR},
+      </if>
+      <if test="diag_Hos != null">
+        #{diag_Hos,jdbcType=VARCHAR},
+      </if>
+      <if test="medication != null">
+        #{medication,jdbcType=VARCHAR},
+      </if>
+      <if test="diag_opinion != null">
+        #{diag_opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="upload_Date!= null">
+        #{upload_Date,jdbcType=DATE},
+      </if>
+      <if test="aegrotat_url != null">
+        #{aegrotat_url,jdbcType=VARCHAR},
+      </if>
+      <if test="filed1 != null">
+        #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        #{filed3,jdbcType=VARCHAR},
+      </if>
+      <if test="delete_Flag != null">
+        #{delete_Flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyy.bean.MemHealth">
+    update ty_mem_health
+    <set>
+      <if test="memId != null">
+        mem_Id = #{memId,jdbcType=BIGINT},
+      </if>
+      <if test="memName != null">
+        mem_Name = #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="memType != null">
+        mem_Type = #{memType,jdbcType=VARCHAR},
+      </if>
+      <if test="diagDate != null">
+        diag_Date = #{diagDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diagIll != null">
+        diag_Ill = #{diagIll,jdbcType=VARCHAR},
+      </if>
+      <if test="diagHos != null">
+        diag_Hos = #{diagHos,jdbcType=VARCHAR},
+      </if>
+      <if test="medication != null">
+        medication = #{medication,jdbcType=VARCHAR},
+      </if>
+      <if test="diagOpinion != null">
+        diag_opinion = #{diagOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDate == null">
+        upload_Date = sysdate,
+      </if>
+      <if test="aegrotatUrl != null">
+        aegrotat_url = #{aegrotatUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="filed1 != null">
+        filed1 = #{filed1,jdbcType=VARCHAR},
+      </if>
+      <if test="filed2 != null">
+        filed2 = #{filed2,jdbcType=VARCHAR},
+      </if>
+      <if test="filed3 != null">
+        filed3 = #{filed3,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_Flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyy.bean.MemHealth">
+    update ty_mem_health
+    set mem_Id = #{memId,jdbcType=BIGINT},
+      mem_Name = #{memName,jdbcType=VARCHAR},
+      mem_Type = #{mem_Type,jdbcType=INTEGER},
+      diag_Date = #{diag_Date,jdbcType=TIMESTAMP},
+      diag_Ill = #{diag_Ill,jdbcType=VARCHAR},
+      diag_Hos = #{diag_Hos,jdbcType=VARCHAR},
+      medication = #{medication,jdbcType=VARCHAR},
+      diag_opinion = #{diag_opinion,jdbcType=VARCHAR},
+      upload_Date = #{upload_Date,jdbcType=DATE},
+      aegrotat_url = #{aegrotat_url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimarykey" parameterType="com.tyyy.bean.MemHealth">
+    update ty_mem_health
+    set mem_Id = #{mem_Id,jdbcType=BIGINT},
+      mem_Name = #{mem_Name,jdbcType=VARCHAR},
+      mem_Type = #{mem_Type,jdbcType=INTEGER},
+      diag_Date = #{diag_Date,jdbcType=TIMESTAMP},
+      diag_Ill = #{diag_Ill,jdbcType=VARCHAR},
+      diag_Hos = #{diag_Hos,jdbcType=VARCHAR},
+      medication = #{medication,jdbcType=VARCHAR},
+      diag_opinion = #{diag_opinion,jdbcType=VARCHAR},
+      upload_Date = #{upload_Date,jdbcType=DATE},
+      aegrotat_url = #{aegrotat_url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selFamById" parameterType="java.lang.Long" resultType="java.lang.String">
+	 	select fam_Name from ty_mem_family where id = #{fam_Id}
+	</select> 
+	<update id="deleteHealth" parameterType="java.lang.Long">
+	 	update ty_mem_health h,ty_mem_family f set h.delete_flag=1 where h.fam_Id=f.id and h.fam_id = #{id}
+	 </update>
+</mapper>

@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>我的体质是：痰湿质</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../tz.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {background: #FFF !important;}
+    .small-tip { font-size: 14px; }
+    </style>
+
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+   <div id='wx_pic' style='margin:0 auto;display:none;'>
+       <img src='../gun1.jpg' />
+   </div>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+          <h1>我的体质测试结果</h1>
+      </div>
+    </header>
+
+    <div style="display:none;">
+      <img src="">
+    </div>
+
+    <div class="container result-container">
+
+      <!--结果类型-->
+      <div class="row typeinfo">
+        <div class="col-xs-12 typeinfo-text"  >
+          <div class="test-intro">
+            <h4>我的体质是</h4>
+            <h1>痰湿质</h1>
+             <h3 id="other">
+             <br/>
+            </h3>
+             <script type="text/javascript">
+             function getPar(par){
+                 //获取当前URL
+                 var local_url = document.location.href; 
+                 //获取要取得的get参数位置
+                 var get = local_url.indexOf(par +"=");
+                 if(get == -1){
+                     return false;   
+                 }   
+                 //截取字符串
+                 var get_par = local_url.slice(par.length + get + 1);    
+                 //判断截取后的字符串是否还有其他get参数
+                 var nextPar = get_par.indexOf("&");
+                 if(nextPar != -1){
+                     get_par = get_par.slice(0, nextPar);
+                 }
+                 return get_par;
+             }
+           
+            
+             var bodyA2=getPar("bodyA2");
+             bodyA2= decodeURI(bodyA2,"UTF-8");
+            //    if(bodyA2!="倾向"){
+                  document.getElementById("other").innerText=bodyA2;
+             // }
+            </script>
+              
+          </div>
+          <p class="typeinfo-desc">
+       根据您的体质辨识结果，建议您从痰湿质调理，因为脾气虚弱，导致脾运化水液功能减弱，过多水液停留体内，形成痰湿和水肿，中医有“百病多由痰作祟”的说法。祛湿首先要健脾，再配合生活方式的改变从而改善体质偏颇。        
+          </p>
+        </div>
+      </div>
+
+      <div class="tizhi-pics">
+        <div class="pic-frame" style="width:1470px">
+                          <img src="rm5/1.jpg" />
+                          <img src="rm5/2.jpg" />
+                          <img src="rm5/3.jpg" />
+                          <img src="rm5/4.jpg" />
+                          <img src="rm5/5.jpg" />
+                          <img src="rm5/6.jpg" />
+                          <img src="rm5/7.jpg" />
+                           <img src="rm5/8.jpg" />
+                            <img src="rm5/9.jpg" />
+                    </div>
+      </div>
+
+
+     
+
+      <div class="row gallry">
+
+      </div>
+
+      <!--结果解释-->
+      <div class="row desc-list">
+
+        
+        <div class="item active">
+            <h3>什么是痰湿？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>四肢重！排泄浊！大肚腩！浑身腻！</li>
+                <li>痰湿是人体内津液代谢失常停留于体内导致的病理产物。</li>
+                <li>痰湿形成之后，可随处停留，又可引起脏腑功能失常，导致疾病的发生。</li>
+                <li>脾主运化，外感湿邪，脾胃受阻，水湿内停，凝聚为痰湿。</li> 
+                <li>痰湿质的形成于生活方式关系最为密切，多发于生活富足的人。</li> 
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>痰湿体质有什么困扰？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>面色黄胖而黯，眼胞微浮，容易困倦，平素舌体胖大，舌苔白腻或黄腻，身重不爽。</li>
+                <li>容易发胖，脚步声大，屁股坐下去就不爱起来。</li>
+                <li>不喜欢喝水，喝多水会不舒服，腹胀、面部虚胖、手脚肿胀、体重增加、大便不畅。</li>
+                <li>长期小便浑浊、起泡沫。</li>
+                <li>出汗两极分化，要不就明显少汗无汗，要不就汗出过多。</li>
+                <li>缓慢迟钝，胸闷、头晕脑胀、嗜睡、赖床、喜欢睡回笼觉。</li>
+                <li>大便燥结或者粘滞不爽，并且异味大。</li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>我为什么会痰湿？<em></em></h3>
+            <div class="content">
+                <ul>
+                 <li  ><b>先天禀赋：</b></li>
+                <li  class="my">小时候吃冰冻寒凉的东西太多，伤了阳气，常用空调冷气。</li>
+                 <li  ><b>年老久病： </b></li>
+                <li  class="my">脾胃虚损，运化功能减退或肾阳虚衰，不能化气行水。</li>
+                <li  ><b>缺乏运动：  </b></li>
+                <li  class="my">长期喜卧久坐少动，气血运行不畅，脾胃运化呆滞，不能运化水湿，聚湿致痰湿内生。</li>
+                <li  ><b>饮食不规： </b></li>
+                <li  class="my">吃的多，暴饮暴食，爱吃冰冻寒凉、膏粱厚味，常吃加工食品，特别爱吃甜或咸。不吃早餐，熬夜，吃夜宵，饮酒过多。</li>
+               
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>痰湿体质更容易患哪些疾病？<em></em></h3>
+            <div class="content">
+                <ul>
+                <li>痛风、高血压、高血脂、冠心病、心梗、中风、代谢综合症、脑血管疾病。</li>
+                <li>糖尿病：血中的糖也是一种湿气的存在，健脾化湿对糖尿病有效。</li>
+                <li>脂肪肝：湿气浸淫的一种表现，有吃剩饭习惯、爱吃精米白面的人也会有脂肪肝。</li>
+                <li>不孕不育、颈椎病、皮肤暗黄、肥胖症、深眼袋、美尼尔综合症。</li>                </ul>
+            </div>
+        </div>
+
+        
+        <div class="item active">
+            <h3>轻妍教你这么改善！<em></em></h3>
+            <div class="content">
+                <ul>
+                <li  ><b>饮食调理： </b></li>
+                <li  class="my">少食甜黏油腻，少喝酒、勿过饱。多食健脾利湿、化痰祛湿的清淡食物，如白萝卜、葱、姜、白果、红小豆等。</li>
+               
+                <li  ><b>中药调理：</b> </li>
+                <li  class="my">具有芳香化浊、健脾化湿、升清降浊功效的药物有：茯苓、薏米、砂仁、 莲子、芡实、冬瓜皮、泽泻、玉米须、葫芦皮、藿香、佩兰、苍术、厚朴、豆蔻、草巢、木瓜、五加皮、山药、白术、甘草、白扁豆、赤小豆等。可以祛痰、化痰的中药有：佛手、橘皮、旋覆花、川贝母、浙贝母、竹茹、竹沥、桔梗、胖大海、海藻、昆布、百部、白果、罗汉果、桑白皮等。</li>
+                <li  ><b>适度运动： </b> </li>
+                <li  class="my">让出汗来排出湿痰。运动后切忌喝冷饮，吹空调。</li>
+                
+                <li  ><b>心情平静：</b> </li>
+                <li  class="my">清理杂乱纷纭的念头不如跟着感觉走，多思伤脾，脾伤痰湿难化。</li>                </ul>
+            </div>
+        </div>
+
+        
+    </div>
+ <div id="tool">
+		<ul class="toollist toollist_blue">
+			<li><a href="http://tysrysgj.com/"><img src="../home.png">
+					<p>网站首页</p></a></li>
+			<li><a href="tel:4007661686"><img src="../tel.png">
+					<p>一键拨号</p></a></li>
+			
+			<li><a href="../analysis.html"><img src="../guestbook.png">
+					<p>体质分析</p></a></li>
+		</ul>
+	</div>
+    
+</div>
+
+
+
+<script src="http://img.huofar.com/js/jquery-1.11.0.min.js"></script>
+<!--script src="http://img.huofar.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
+<script type="text/javascript">
+	$(function(){
+		//location.hash = $('#test_id').attr('value');
+		//window.history.pushState("","","http://www.huofar.com/tizhi/16297186")
+			
+		$('.desc-list').find('h3').click(function(){
+			if($(this).parent().hasClass('active'))
+				$(this).parent().removeClass('active');
+			else
+				$(this).parent().addClass('active');
+		});
+
+		$('.share-to-weixin').click(function(){
+			$('#shareAlertView').css('height',$('body').height()).show();
+		});
+
+		$('#shareAlertView').click(function(){
+			$('#shareAlertView').fadeOut('fast');
+		});
+	});
+
+</script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  
+
+</body>
+</html>
